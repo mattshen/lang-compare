@@ -1,16 +1,38 @@
 # 1. Basics
+
+Basic language syntax, such as assignment, control structures, function defintion etc. 
+
 ## Assignment, Variable bindings
+| Keyword /Operator |  Go   |  JS   | Description            |
+| :---------------- | :---: | :---: | :--------------------- |
+| __var__           |  Yes  |  Yes  | declare variable       |
+| __let__           |  No   |  Yes  | declare variable       |
+| __const__         |  No   |  Yes  | declare constant       |
+| __:=__            |  Yes  |  No   | type inference binding |
+| __=__             |  Yes  |  Yes  | normal binding         |
+
 ```go
 var x int // declare
 x = 3 // assignment
 y := 4 // := indicates type inference
 
 a, b := func1() // multiple assignments
+
+var x int // declare
+x = 3 // assignment
+y := 4 // := indicates type inference
 ```
 
-## Define functions
-```go
+```javascript
+var a = 42;
+let x = 123;
+const y = 'abc';
+```
 
+
+## Define functions
+
+```go
 // no param, no return
 func foo() {
   fmt.Println("hello world")
