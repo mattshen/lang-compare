@@ -240,4 +240,3 @@ Parameter | Description
 --------- | -----------
 ID | The ID of the kitten to delete
 
-
