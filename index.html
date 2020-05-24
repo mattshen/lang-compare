@@ -319,10 +319,22 @@
       <div class="content">
         <h1 id='1-basics'>1. Basics</h1>
 <p>Basic language syntax, such as assignment, control structures, function defintion etc. </p>
-<h2 id='assignment-variable-bindings'>Assignment, Variable bindings</h2>
+<h2 id='assignment-variable-bindings'>Assignment, Variable bindings</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">x</span> <span class="kt">int</span> <span class="c">// declare</span>
+<span class="n">x</span> <span class="o">=</span> <span class="m">3</span> <span class="c">// assignment</span>
+<span class="n">y</span> <span class="o">:=</span> <span class="m">4</span> <span class="c">// := indicates type inference</span>
+
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">func1</span><span class="p">()</span> <span class="c">// multiple assignments</span>
+
+<span class="k">var</span> <span class="n">x</span> <span class="kt">int</span> <span class="c">// declare</span>
+<span class="n">x</span> <span class="o">=</span> <span class="m">3</span> <span class="c">// assignment</span>
+<span class="n">y</span> <span class="o">:=</span> <span class="m">4</span> <span class="c">// := indicates type inference</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">abc</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div>
 <table><thead>
 <tr>
-<th style="text-align: left">Keyword /Operator</th>
+<th style="text-align: left">Keyword / Operator</th>
 <th style="text-align: center">Go</th>
 <th style="text-align: center">JS</th>
 <th style="text-align: left">Description</th>
@@ -359,19 +371,7 @@
 <td style="text-align: left">normal binding</td>
 </tr>
 </tbody></table>
-<div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">x</span> <span class="kt">int</span> <span class="c">// declare</span>
-<span class="n">x</span> <span class="o">=</span> <span class="m">3</span> <span class="c">// assignment</span>
-<span class="n">y</span> <span class="o">:=</span> <span class="m">4</span> <span class="c">// := indicates type inference</span>
-
-<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">func1</span><span class="p">()</span> <span class="c">// multiple assignments</span>
-
-<span class="k">var</span> <span class="n">x</span> <span class="kt">int</span> <span class="c">// declare</span>
-<span class="n">x</span> <span class="o">=</span> <span class="m">3</span> <span class="c">// assignment</span>
-<span class="n">y</span> <span class="o">:=</span> <span class="m">4</span> <span class="c">// := indicates type inference</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">abc</span><span class="dl">'</span><span class="p">;</span>
-</code></pre></div><h2 id='define-functions'>Define functions</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// no param, no return</span>
+<h2 id='define-functions'>Define functions</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// no param, no return</span>
 <span class="k">func</span> <span class="n">foo</span><span class="p">()</span> <span class="p">{</span>
   <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">)</span>
 <span class="p">}</span>
