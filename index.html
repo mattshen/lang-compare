@@ -201,7 +201,7 @@
       <script src="javascripts/all-c5541673.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;go&quot;,&quot;js&quot;]">
+  <body class="index" data-languages="[&quot;go&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,7 +212,7 @@
       <img src="images/logo-1e815a84.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="go">go</a>
-              <a href="#" data-language-name="js">js</a>
+              <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -317,13 +317,61 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='1-basics'>1. Basics</h1><h2 id='assignment-variable-bindings'>Assignment, Variable bindings</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">x</span> <span class="kt">int</span> <span class="c">// declare</span>
+        <h1 id='1-basics'>1. Basics</h1>
+<p>Basic language syntax, such as assignment, control structures, function defintion etc. </p>
+<h2 id='assignment-variable-bindings'>Assignment, Variable bindings</h2>
+<table><thead>
+<tr>
+<th style="text-align: left">Keyword /Operator</th>
+<th style="text-align: center">Go</th>
+<th style="text-align: center">JS</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>var</strong></td>
+<td style="text-align: center">Yes</td>
+<td style="text-align: center">Yes</td>
+<td style="text-align: left">declare variable</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>let</strong></td>
+<td style="text-align: center">No</td>
+<td style="text-align: center">Yes</td>
+<td style="text-align: left">declare variable</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>const</strong></td>
+<td style="text-align: center">No</td>
+<td style="text-align: center">Yes</td>
+<td style="text-align: left">declare constant</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>:=</strong></td>
+<td style="text-align: center">Yes</td>
+<td style="text-align: center">No</td>
+<td style="text-align: left">type inference binding</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>=</strong></td>
+<td style="text-align: center">Yes</td>
+<td style="text-align: center">Yes</td>
+<td style="text-align: left">normal binding</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">x</span> <span class="kt">int</span> <span class="c">// declare</span>
 <span class="n">x</span> <span class="o">=</span> <span class="m">3</span> <span class="c">// assignment</span>
 <span class="n">y</span> <span class="o">:=</span> <span class="m">4</span> <span class="c">// := indicates type inference</span>
 
 <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">func1</span><span class="p">()</span> <span class="c">// multiple assignments</span>
-</code></pre></div><h2 id='define-functions'>Define functions</h2><div class="highlight"><pre class="highlight go tab-go"><code>
-<span class="c">// no param, no return</span>
+
+<span class="k">var</span> <span class="n">x</span> <span class="kt">int</span> <span class="c">// declare</span>
+<span class="n">x</span> <span class="o">=</span> <span class="m">3</span> <span class="c">// assignment</span>
+<span class="n">y</span> <span class="o">:=</span> <span class="m">4</span> <span class="c">// := indicates type inference</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">abc</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div><h2 id='define-functions'>Define functions</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// no param, no return</span>
 <span class="k">func</span> <span class="n">foo</span><span class="p">()</span> <span class="p">{</span>
   <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">)</span>
 <span class="p">}</span>
@@ -513,7 +561,7 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="go">go</a>
-                <a href="#" data-language-name="js">js</a>
+                <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
     </div>
