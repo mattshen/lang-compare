@@ -3,13 +3,6 @@
 Basic language syntax, such as assignment, control structures, function defintion etc. 
 
 ## Assignment, Variable bindings
-| Keyword /Operator |  Go   |  JS   | Description            |
-| :---------------- | :---: | :---: | :--------------------- |
-| __var__           |  Yes  |  Yes  | declare variable       |
-| __let__           |  No   |  Yes  | declare variable       |
-| __const__         |  No   |  Yes  | declare constant       |
-| __:=__            |  Yes  |  No   | type inference binding |
-| __=__             |  Yes  |  Yes  | normal binding         |
 
 ```go
 var x int // declare
@@ -29,6 +22,13 @@ let x = 123;
 const y = 'abc';
 ```
 
+| Keyword / Operator |  Go   |  JS   | Description            |
+| :----------------- | :---: | :---: | :--------------------- |
+| __var__            |  Yes  |  Yes  | declare variable       |
+| __let__            |  No   |  Yes  | declare variable       |
+| __const__          |  No   |  Yes  | declare constant       |
+| __:=__             |  Yes  |  No   | type inference binding |
+| __=__              |  Yes  |  Yes  | normal binding         |
 
 ## Define functions
 
