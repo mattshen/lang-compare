@@ -22,13 +22,13 @@ let x = 123;
 const y = 'abc';
 ```
 
-| Keyword / Operator |  Go   |  JS   | Description            |
-| :----------------- | :---: | :---: | :--------------------- |
-| __var__            |  Yes  |  Yes  | declare variable       |
-| __let__            |  No   |  Yes  | declare variable       |
-| __const__          |  No   |  Yes  | declare constant       |
-| __:=__             |  Yes  |  No   | type inference binding |
-| __=__              |  Yes  |  Yes  | normal binding         |
+| feature \ lang        | Go        | JS               |
+| --------------------- | --------- | ---------------- |
+| Declare Variable      | __var__   | __var__, __let__ |
+| Declare Constant      | __const__ | __const__        |
+| binding / assignment  | __=__     | __=__            |
+| binding w/ type infer | __:=__    | NA               |
+
 
 ## Define functions
 
@@ -43,11 +43,40 @@ func sum(a, b int) int {
    return a + b
 }
 
+// return multiple restuls
 func sumAndProduct(a, b int) (int, int) {
   return a + b, a * b
 }
 
 ```
+
+```javascript
+// no param, no return
+function foo() {
+  console.log("hello world");
+}
+
+// with param and return
+function sum(a, b) {
+  return a + b;
+}
+
+// return multiple results
+function sumAndProduct(a, b) {
+  // or return { sum: a + b, product: a * b }
+  return [a + b, a * b];
+}
+
+// arrow function
+const sum = (a, b) => a + b;
+```
+
+| feature \ lang                  | Go       | JS           |
+| ------------------------------- | -------- | ------------ |
+| denote function definition      | __func__ | __function__ |
+| denote arrow function defintion | NA       | __=>__       |
+
+
 ## Built-in Data types
 
 ### string and char
