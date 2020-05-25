@@ -334,41 +334,30 @@
 </code></pre></div>
 <table><thead>
 <tr>
-<th style="text-align: left">Keyword / Operator</th>
-<th style="text-align: center">Go</th>
-<th style="text-align: center">JS</th>
-<th style="text-align: left">Description</th>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><strong>var</strong></td>
-<td style="text-align: center">Yes</td>
-<td style="text-align: center">Yes</td>
-<td style="text-align: left">declare variable</td>
+<td>Declare Variable</td>
+<td><strong>var</strong></td>
+<td><strong>var</strong>, <strong>let</strong></td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>let</strong></td>
-<td style="text-align: center">No</td>
-<td style="text-align: center">Yes</td>
-<td style="text-align: left">declare variable</td>
+<td>Declare Constant</td>
+<td><strong>const</strong></td>
+<td><strong>const</strong></td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>const</strong></td>
-<td style="text-align: center">No</td>
-<td style="text-align: center">Yes</td>
-<td style="text-align: left">declare constant</td>
+<td>binding / assignment</td>
+<td><strong>=</strong></td>
+<td><strong>=</strong></td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>:=</strong></td>
-<td style="text-align: center">Yes</td>
-<td style="text-align: center">No</td>
-<td style="text-align: left">type inference binding</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>=</strong></td>
-<td style="text-align: center">Yes</td>
-<td style="text-align: center">Yes</td>
-<td style="text-align: left">normal binding</td>
+<td>binding w/ type infer</td>
+<td><strong>:=</strong></td>
+<td>NA</td>
 </tr>
 </tbody></table>
 <h2 id='define-functions'>Define functions</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// no param, no return</span>
@@ -381,11 +370,49 @@
    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 <span class="p">}</span>
 
+<span class="c">// return multiple restuls</span>
 <span class="k">func</span> <span class="n">sumAndProduct</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
 <span class="p">}</span>
 
-</code></pre></div><h2 id='built-in-data-types'>Built-in Data types</h2><h3 id='string-and-char'>string and char</h3><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">s1</span> <span class="kt">string</span> <span class="o">=</span> <span class="s">"Hello"</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// no param, no return</span>
+<span class="kd">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello world</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// with param and return</span>
+<span class="kd">function</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// return multiple results</span>
+<span class="kd">function</span> <span class="nx">sumAndProduct</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// or return { sum: a + b, product: a * b }</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">a</span> <span class="o">*</span> <span class="nx">b</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// arrow function</span>
+<span class="kd">const</span> <span class="nx">sum</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>denote function definition</td>
+<td><strong>func</strong></td>
+<td><strong>function</strong></td>
+</tr>
+<tr>
+<td>denote arrow function defintion</td>
+<td>NA</td>
+<td><strong>=&gt;</strong></td>
+</tr>
+</tbody></table>
+<h2 id='built-in-data-types'>Built-in Data types</h2><h3 id='string-and-char'>string and char</h3><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">s1</span> <span class="kt">string</span> <span class="o">=</span> <span class="s">"Hello"</span>
 <span class="k">var</span> <span class="n">s2</span> <span class="kt">string</span> <span class="o">=</span> <span class="s">`string goes to
 the next line`</span>
 
