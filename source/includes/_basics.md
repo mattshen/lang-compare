@@ -85,30 +85,60 @@ var s1 string = "Hello"
 var s2 string = `string goes to
 the next line`
 
+// string interpolation
+import ("fmt")
+date := fmt.Sprintf("%d-%d-%d", year, month, day)
+
 var c1 rune = '我' //rune is alias for int32, which hold a unicode for the character
 
 ```
 
-### integer types
-Go's integer types are: 
-`uint8` , `uint16` , `uint32` , `uint64` , `int8` , `int16` , `int32` and `int64`
+```javascript
+const s1 = "hello";
+const s2 = 'world';
+const s3 =`hello
+world`;
 
-```go
-var u uint = 42
+// string interpolation
+const s4 = `hello ${s2}`;
 ```
-> `unit` is either 32 or 64 bit
-> `int` isn't alias to int32. `int` could be 32bit or 64bit.
-> `uintptr` is an unsigned integer large enough to store the uninterpreted bits
-> `byte` is alias for `uint8`
-> `rune` is alias for `int32`
 
-### float types
+| feature \ lang       | Go                 | JS                 |
+| -------------------- | ------------------ | ------------------ |
+| with quote           | Yes                | Yes                |
+| with single-quote    | Yes                | Yes                |
+| multiline string     | Yes, with backtick | Yes, with backtick |
+| string interpolation | No, via `fmt`      | Yes                |
+
+### numbers
+Go's integer types are: 
+
 Go's float types are: `float32` and `float64`
 
 ```go
+var u uint = 42
+
 var f float64 = 3.1415826525
 var pi float32 = 22. / 7
+
+// > `unit` is either 32 or 64 bit.
+// > `int` isn't alias to int32. `int` could be 32bit or 64bit.
+// > `uintptr` is an unsigned integer large enough to store the uninterpreted bits.
+// > `byte` is alias for `uint8`.
+// > `rune` is alias for `int32`.
 ```
+
+
+
+```javascript
+const i = 123;
+const f = 123.123;
+```
+
+| feature \ lang | Go                                                                            | JS                        |
+| -------------- | ----------------------------------------------------------------------------- | ------------------------- |
+| integer types  | `uint8`, `uint16`, `uint32`, `uint64` <br/> `int8`, `int16`, `int32`, `int64` | "integer" via Number type |
+| float types    | `float32`, `float64`                                                          | float via Number type     |
 
 ### boolean types
 
@@ -116,6 +146,16 @@ var pi float32 = 22. / 7
 var f bool = false
 var t bool = true
 ```
+
+```javascript
+const f = false;
+const t = true;
+```
+
+| feature \ lang | Go     | JS                                           |
+| -------------- | ------ | -------------------------------------------- |
+| Truthy         | `true` | `true`, others values not listed below       |
+| Falsy          | `true` | `false`, `0`, `-0`, `0n`, `""`, `null`, `undefined`, `NaN` |
 
 ### Collections
 
