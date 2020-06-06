@@ -128,8 +128,6 @@ var pi float32 = 22. / 7
 // > `rune` is alias for `int32`.
 ```
 
-
-
 ```javascript
 const i = 123;
 const f = 123.123;
@@ -152,9 +150,9 @@ const f = false;
 const t = true;
 ```
 
-| feature \ lang | Go     | JS                                           |
-| -------------- | ------ | -------------------------------------------- |
-| Truthy         | `true` | `true`, others values not listed below       |
+| feature \ lang | Go     | JS                                                         |
+| -------------- | ------ | ---------------------------------------------------------- |
+| Truthy         | `true` | `true`, others values not listed below                     |
 | Falsy          | `true` | `false`, `0`, `-0`, `0n`, `""`, `null`, `undefined`, `NaN` |
 
 ### Collections
@@ -171,9 +169,40 @@ for i := 0; i < 2; i++ {
     }
 }
 fmt.Println("2d: ", twoD)
+
+// copy/clone array
+ys := xs
+// reference original array
+zs := &xs
 ```
 
+```javascript
+var cars = ["apple", "organce", "pear"];
+var cars = new Array("Saab", "Volvo", "BMW");
+for (let i = 0; i < 3; i ++ ) {
+  console.log(cars[i]);
+}
+
+// copy/clone array
+const newCars = cars.slice();
+const newCars1 = [...cars];
+
+// reference original array
+const carsRef = cars;
+```
+
+| feature \ lang          | Go                       | JS                                  |
+| ----------------------- | ------------------------ | ----------------------------------- |
+| Define & Initialization | `var xs [5]int = 5int{}` | `var xs = []`                       |
+| Subscript               | `xs[i]`                  | `xs[i]`                             |
+| Size of Array           | `len(xs)`                | `xs.length`                         |
+| Copy Array              | `ys := xs`               | `ys = xs.slice()` or `ys = [...xs]` |
+
+
 #### Slices
+
+
+
 #### Maps
 #### Ranges
 
