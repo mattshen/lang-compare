@@ -526,7 +526,53 @@ world`</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"2d: "</span><span class="p">,</span> <span class="n">twoD</span><span class="p">)</span>
-</code></pre></div><h4 id='slices'>Slices</h4><h4 id='maps'>Maps</h4><h4 id='ranges'>Ranges</h4><h2 id='custom-data-types'>Custom data types</h2><h2 id='conditional'>Conditional</h2><h3 id='if-else'>If/Else</h3><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// simple</span>
+
+<span class="c">// copy/clone array</span>
+<span class="n">ys</span> <span class="o">:=</span> <span class="n">xs</span>
+<span class="c">// reference original array</span>
+<span class="n">zs</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">xs</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">cars</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">apple</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">organce</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">pear</span><span class="dl">"</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">cars</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="dl">"</span><span class="s2">Saab</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Volvo</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">BMW</span><span class="dl">"</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">i</span> <span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cars</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="c1">// copy/clone array</span>
+<span class="kd">const</span> <span class="nx">newCars</span> <span class="o">=</span> <span class="nx">cars</span><span class="p">.</span><span class="nx">slice</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">newCars1</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">cars</span><span class="p">];</span>
+
+<span class="c1">// reference original array</span>
+<span class="kd">const</span> <span class="nx">carsRef</span> <span class="o">=</span> <span class="nx">cars</span><span class="p">;</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Define &amp; Initialization</td>
+<td><code>var xs [5]int = 5int{}</code></td>
+<td><code>var xs = []</code></td>
+</tr>
+<tr>
+<td>Subscript</td>
+<td><code>xs[i]</code></td>
+<td><code>xs[i]</code></td>
+</tr>
+<tr>
+<td>Size of Array</td>
+<td><code>len(xs)</code></td>
+<td><code>xs.length</code></td>
+</tr>
+<tr>
+<td>Copy Array</td>
+<td><code>ys := xs</code></td>
+<td><code>ys = xs.slice()</code> or <code>ys = [...xs]</code></td>
+</tr>
+</tbody></table>
+<h4 id='slices'>Slices</h4><h4 id='maps'>Maps</h4><h4 id='ranges'>Ranges</h4><h2 id='custom-data-types'>Custom data types</h2><h2 id='conditional'>Conditional</h2><h3 id='if-else'>If/Else</h3><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// simple</span>
 <span class="k">if</span> <span class="m">7</span> <span class="o">%</span> <span class="m">2</span> <span class="o">==</span> <span class="m">0</span> <span class="p">{</span>
   <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"7 is even"</span><span class="p">)</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
