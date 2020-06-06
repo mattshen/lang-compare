@@ -416,27 +416,107 @@
 <span class="k">var</span> <span class="n">s2</span> <span class="kt">string</span> <span class="o">=</span> <span class="s">`string goes to
 the next line`</span>
 
+<span class="c">// string interpolation</span>
+<span class="k">import</span> <span class="p">(</span><span class="s">"fmt"</span><span class="p">)</span>
+<span class="n">date</span> <span class="o">:=</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Sprintf</span><span class="p">(</span><span class="s">"%d-%d-%d"</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
+
 <span class="k">var</span> <span class="n">c1</span> <span class="kt">rune</span> <span class="o">=</span> <span class="sc">'我'</span> <span class="c">//rune is alias for int32, which hold a unicode for the character</span>
 
-</code></pre></div><h3 id='integer-types'>integer types</h3>
-<p>Go&#39;s integer types are: 
-<code>uint8</code> , <code>uint16</code> , <code>uint32</code> , <code>uint64</code> , <code>int8</code> , <code>int16</code> , <code>int32</code> and <code>int64</code></p>
-<div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">u</span> <span class="kt">uint</span> <span class="o">=</span> <span class="m">42</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">s1</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">s2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">world</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">s3</span> <span class="o">=</span><span class="s2">`hello
+world`</span><span class="p">;</span>
+
+<span class="c1">// string interpolation</span>
+<span class="kd">const</span> <span class="nx">s4</span> <span class="o">=</span> <span class="s2">`hello </span><span class="p">${</span><span class="nx">s2</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
 </code></pre></div>
-<blockquote>
-<p><code>unit</code> is either 32 or 64 bit
-<code>int</code> isn&#39;t alias to int32. <code>int</code> could be 32bit or 64bit.
-<code>uintptr</code> is an unsigned integer large enough to store the uninterpreted bits
-<code>byte</code> is alias for <code>uint8</code>
-<code>rune</code> is alias for <code>int32</code></p>
-</blockquote>
-<h3 id='float-types'>float types</h3>
+<table><thead>
+<tr>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>with quote</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>with single-quote</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>multiline string</td>
+<td>Yes, with backtick</td>
+<td>Yes, with backtick</td>
+</tr>
+<tr>
+<td>string interpolation</td>
+<td>No, via <code>fmt</code></td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+<h3 id='numbers'>numbers</h3>
+<p>Go&#39;s integer types are: </p>
+
 <p>Go&#39;s float types are: <code>float32</code> and <code>float64</code></p>
-<div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">f</span> <span class="kt">float64</span> <span class="o">=</span> <span class="m">3.1415826525</span>
+<div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">u</span> <span class="kt">uint</span> <span class="o">=</span> <span class="m">42</span>
+
+<span class="k">var</span> <span class="n">f</span> <span class="kt">float64</span> <span class="o">=</span> <span class="m">3.1415826525</span>
 <span class="k">var</span> <span class="n">pi</span> <span class="kt">float32</span> <span class="o">=</span> <span class="m">22.</span> <span class="o">/</span> <span class="m">7</span>
-</code></pre></div><h3 id='boolean-types'>boolean types</h3><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">f</span> <span class="kt">bool</span> <span class="o">=</span> <span class="no">false</span>
+
+<span class="c">// &gt; `unit` is either 32 or 64 bit.</span>
+<span class="c">// &gt; `int` isn't alias to int32. `int` could be 32bit or 64bit.</span>
+<span class="c">// &gt; `uintptr` is an unsigned integer large enough to store the uninterpreted bits.</span>
+<span class="c">// &gt; `byte` is alias for `uint8`.</span>
+<span class="c">// &gt; `rune` is alias for `int32`.</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">f</span> <span class="o">=</span> <span class="mf">123.123</span><span class="p">;</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>integer types</td>
+<td><code>uint8</code>, <code>uint16</code>, <code>uint32</code>, <code>uint64</code> <br/> <code>int8</code>, <code>int16</code>, <code>int32</code>, <code>int64</code></td>
+<td>&quot;integer&quot; via Number type</td>
+</tr>
+<tr>
+<td>float types</td>
+<td><code>float32</code>, <code>float64</code></td>
+<td>float via Number type</td>
+</tr>
+</tbody></table>
+<h3 id='boolean-types'>boolean types</h3><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">f</span> <span class="kt">bool</span> <span class="o">=</span> <span class="no">false</span>
 <span class="k">var</span> <span class="n">t</span> <span class="kt">bool</span> <span class="o">=</span> <span class="no">true</span>
-</code></pre></div><h3 id='collections'>Collections</h3><h4 id='arrays'>Arrays</h4><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">xs</span> <span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="kt">int</span> <span class="o">=</span> <span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">5</span><span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">f</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Truthy</td>
+<td><code>true</code></td>
+<td><code>true</code>, others values not listed below</td>
+</tr>
+<tr>
+<td>Falsy</td>
+<td><code>true</code></td>
+<td><code>false</code>, <code>0</code>, <code>-0</code>, <code>0n</code>, <code>&quot;&quot;</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code></td>
+</tr>
+</tbody></table>
+<h3 id='collections'>Collections</h3><h4 id='arrays'>Arrays</h4><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">xs</span> <span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="kt">int</span> <span class="o">=</span> <span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">5</span><span class="p">}</span>
 <span class="n">xs</span> <span class="o">:=</span> <span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">5</span><span class="p">}</span>
 
 <span class="k">var</span> <span class="n">twoD</span> <span class="p">[</span><span class="m">2</span><span class="p">][</span><span class="m">3</span><span class="p">]</span><span class="kt">int</span>
