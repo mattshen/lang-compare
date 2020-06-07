@@ -160,7 +160,7 @@ const t = true;
 #### Arrays
 ```go
 var xs [5]int = [5]int{1, 2, 3, 4, 5}
-xs := [5]int{1, 2, 3, 4, 5}
+xs := [5]int{1, 2, 3, 4, 5} // or [...]int{1, 2, 3, 4, 5}
 
 var twoD [2][3]int
 for i := 0; i < 2; i++ {
@@ -199,7 +199,43 @@ const carsRef = cars;
 | Copy Array              | `ys := xs`               | `ys = xs.slice()` or `ys = [...xs]` |
 
 
-#### Slices
+#### List-like
+```go
+// slice literal
+letters := []string{"a", "b", "c", "d"}
+
+// using function make
+// func make([]T, len, cap) []T
+s := make([]byte, 5, 5)
+
+// create from any array
+x := [3]string{"hello", "world"}
+s := x[:] // a slice referencing to the storage of x
+
+// sub-slice
+b := []byte{'g', 'o', 'l', 'a', 'n', 'g'}
+// b[1:4] == []byte{'o', 'l', 'a'}, sharing the same storage as b
+
+// append
+s := []string{"a", "b", "c"}
+s = append(s, "d")
+s = append(s, "e", "f")
+
+// copy
+c: = make([]string, len(s))
+copy = (c, s)
+
+// remove
+r := []string{"a", "x", "b", "c"} 
+r1 := append(r[:1], r[2:]...) 
+// r  => [a b c c] // side effects
+// r1 => [a b c]
+
+
+```
+
+```javascript
+```
 
 
 
