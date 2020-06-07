@@ -517,7 +517,7 @@ world`</span><span class="p">;</span>
 </tr>
 </tbody></table>
 <h3 id='collections'>Collections</h3><h4 id='arrays'>Arrays</h4><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">xs</span> <span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="kt">int</span> <span class="o">=</span> <span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">5</span><span class="p">}</span>
-<span class="n">xs</span> <span class="o">:=</span> <span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">5</span><span class="p">}</span>
+<span class="n">xs</span> <span class="o">:=</span> <span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">5</span><span class="p">}</span> <span class="c">// or [...]int{1, 2, 3, 4, 5}</span>
 
 <span class="k">var</span> <span class="n">twoD</span> <span class="p">[</span><span class="m">2</span><span class="p">][</span><span class="m">3</span><span class="p">]</span><span class="kt">int</span>
 <span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="m">2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
@@ -572,7 +572,38 @@ world`</span><span class="p">;</span>
 <td><code>ys = xs.slice()</code> or <code>ys = [...xs]</code></td>
 </tr>
 </tbody></table>
-<h4 id='slices'>Slices</h4><h4 id='maps'>Maps</h4><h4 id='ranges'>Ranges</h4><h2 id='custom-data-types'>Custom data types</h2><h2 id='conditional'>Conditional</h2><h3 id='if-else'>If/Else</h3><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// simple</span>
+<h4 id='list-like'>List-like</h4><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// slice literal</span>
+<span class="n">letters</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"a"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"c"</span><span class="p">,</span> <span class="s">"d"</span><span class="p">}</span>
+
+<span class="c">// using function make</span>
+<span class="c">// func make([]T, len, cap) []T</span>
+<span class="n">s</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span>
+
+<span class="c">// create from any array</span>
+<span class="n">x</span> <span class="o">:=</span> <span class="p">[</span><span class="m">3</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">}</span>
+<span class="n">s</span> <span class="o">:=</span> <span class="n">x</span><span class="p">[</span><span class="o">:</span><span class="p">]</span> <span class="c">// a slice referencing to the storage of x</span>
+
+<span class="c">// sub-slice</span>
+<span class="n">b</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">{</span><span class="sc">'g'</span><span class="p">,</span> <span class="sc">'o'</span><span class="p">,</span> <span class="sc">'l'</span><span class="p">,</span> <span class="sc">'a'</span><span class="p">,</span> <span class="sc">'n'</span><span class="p">,</span> <span class="sc">'g'</span><span class="p">}</span>
+<span class="c">// b[1:4] == []byte{'o', 'l', 'a'}, sharing the same storage as b</span>
+
+<span class="c">// append</span>
+<span class="n">s</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"a"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"c"</span><span class="p">}</span>
+<span class="n">s</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">"d"</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">"e"</span><span class="p">,</span> <span class="s">"f"</span><span class="p">)</span>
+
+<span class="c">// copy</span>
+<span class="n">c</span><span class="o">:</span> <span class="o">=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">string</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+<span class="nb">copy</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+<span class="c">// remove</span>
+<span class="n">r</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"a"</span><span class="p">,</span> <span class="s">"x"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"c"</span><span class="p">}</span> 
+<span class="n">r1</span> <span class="o">:=</span> <span class="nb">append</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="o">:</span><span class="m">1</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="m">2</span><span class="o">:</span><span class="p">]</span><span class="o">...</span><span class="p">)</span> 
+<span class="c">// r  =&gt; [a b c c] // side effects</span>
+<span class="c">// r1 =&gt; [a b c]</span>
+
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div><h4 id='maps'>Maps</h4><h4 id='ranges'>Ranges</h4><h2 id='custom-data-types'>Custom data types</h2><h2 id='conditional'>Conditional</h2><h3 id='if-else'>If/Else</h3><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// simple</span>
 <span class="k">if</span> <span class="m">7</span> <span class="o">%</span> <span class="m">2</span> <span class="o">==</span> <span class="m">0</span> <span class="p">{</span>
   <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"7 is even"</span><span class="p">)</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
