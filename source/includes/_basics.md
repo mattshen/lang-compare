@@ -191,15 +191,15 @@ const newCars1 = [...cars];
 const carsRef = cars;
 ```
 
-| feature \ lang          | Go                       | JS                                  |
-| ----------------------- | ------------------------ | ----------------------------------- |
-| Define & Initialization | `var xs [5]int = 5int{}` | `var xs = []`                       |
-| Subscript               | `xs[i]`                  | `xs[i]`                             |
-| Size of Array           | `len(xs)`                | `xs.length`                         |
-| Copy Array              | `ys := xs`               | `ys = xs.slice()` or `ys = [...xs]` |
+| feature \ lang          | Go                         | JS                                  |
+| ----------------------- | -------------------------- | ----------------------------------- |
+| Define & Initialization | `var xs [5]int = [5]int{}` | `var xs = []`                       |
+| Subscript               | `xs[i]`                    | `xs[i]`                             |
+| Size of Array           | `len(xs)`                  | `xs.length`                         |
+| Copy Array              | `ys := xs`                 | `ys = xs.slice()` or `ys = [...xs]` |
 
 
-#### List-like
+#### List or List-like structure
 ```go
 // slice literal
 letters := []string{"a", "b", "c", "d"}
@@ -222,8 +222,8 @@ s = append(s, "d")
 s = append(s, "e", "f")
 
 // copy
-c: = make([]string, len(s))
-copy = (c, s)
+c := make([]string, len(s))
+copy(c, s)
 
 // remove
 r := []string{"a", "x", "b", "c"} 
@@ -235,17 +235,91 @@ r1 := append(r[:1], r[2:]...)
 ```
 
 ```javascript
+const xs = ['a', 'b', 'c'];
+// sub array/list
+xs.slice(0, 2); // => ['a', 'b']
+// append
+xs.push('d'); // => ['a', 'b', 'c', 'd'];
+// pop
+xs.pop(); // => 'd', xs becomes ['a', 'b', 'c']
+// copy
+xs.slice(); // => ['a', 'b', 'c']
+// remove 'b'
+xs.splice(1, 1); // 'b', xs == ['a', 'c']
 ```
 
+In Golang, Slice is usually used instead of List, due to it's first-class suppport in syntax and performance advantage. 
+
+| feature \ lang          | Go                             | JS                           |
+| ----------------------- | ------------------------------ | ---------------------------- |
+| Define & Initialization | `int{}` or `make([]int, 5, 5)` | `const xs = ['a', 'b', 'c']` |
+| append                  | `append(xs, "e", "f")`         | `xs.push('e')`               |
+| Pop                     | `xs[:len(xs) -1]`              | `xs.pop()`                   |
+| sub-list                | `xs[a:b]`                      | `xs.slice(a,b)`              |
+| copy                    | `copy(target, source)`         | `xs.slice()`                 |
+| remove                  | via `append`                   | via `splice`                 |
 
 
 #### Maps
+
+```go
+// create empty map
+m := make(map[string]int)
+
+// create with initial values
+m: = map[string]int{"foo": 1, "bar": 2}
+
+// put value
+m["k1"] = 49
+m["k2"] = 81
+
+// get value
+m["k1"] //=> 49
+
+// delete k-v
+delelte(m, "k2")
+
+// iterate
+for k, v := range m {
+  // do something with k and v
+}
+
+```
+
+```javascript
+// create empty map
+let m = new Map();
+
+// create with initial values
+let m = new Map([["foo", 1], ["bar", 2]]);
+
+// put value
+m.set("k1", 1);
+
+// get value
+m.get("k1");
+
+// delete k-v
+m.delete("k1");
+
+// iterate
+for (let [k, v] of m.entries()) {
+  // do something with k and v
+}
+
+```
+
+| feature \ lang | Go                                   | JS                                 |
+| -------------- | ------------------------------------ | ---------------------------------- |
+| Define         | `make(map[string]int)`               | `new Map()`                        |
+| Initialization | `map[string]int{"foo": 1, "bar": 2}` | `new Map([["foo", 1], ["bar", 2]])` |
+
+
 #### Ranges
 
 ## Custom data types
-## Conditional 
 
-### If/Else
+## Conditional - If/Else
 
 ```go
 // simple
@@ -265,7 +339,7 @@ if num := 9; num < 0 {
 }
 ```
 
-### Switch
+## Conditional - Switch
 ```go
 
 // simple
