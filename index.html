@@ -235,7 +235,10 @@
                     <a href="#custom-data-types" class="toc-h2 toc-link" data-title="Custom data types">Custom data types</a>
                   </li>
                   <li>
-                    <a href="#conditional" class="toc-h2 toc-link" data-title="Conditional">Conditional</a>
+                    <a href="#conditional-if-else" class="toc-h2 toc-link" data-title="Conditional - If/Else">Conditional - If/Else</a>
+                  </li>
+                  <li>
+                    <a href="#conditional-switch" class="toc-h2 toc-link" data-title="Conditional - Switch">Conditional - Switch</a>
                   </li>
                   <li>
                     <a href="#loops" class="toc-h2 toc-link" data-title="Loops">Loops</a>
@@ -553,7 +556,7 @@ world`</span><span class="p">;</span>
 </thead><tbody>
 <tr>
 <td>Define &amp; Initialization</td>
-<td><code>var xs [5]int = 5int{}</code></td>
+<td><code>var xs [5]int = [5]int{}</code></td>
 <td><code>var xs = []</code></td>
 </tr>
 <tr>
@@ -572,7 +575,7 @@ world`</span><span class="p">;</span>
 <td><code>ys = xs.slice()</code> or <code>ys = [...xs]</code></td>
 </tr>
 </tbody></table>
-<h4 id='list-like'>List-like</h4><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// slice literal</span>
+<h4 id='list-or-list-like-structure'>List or List-like structure</h4><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// slice literal</span>
 <span class="n">letters</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"a"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"c"</span><span class="p">,</span> <span class="s">"d"</span><span class="p">}</span>
 
 <span class="c">// using function make</span>
@@ -593,8 +596,8 @@ world`</span><span class="p">;</span>
 <span class="n">s</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">"e"</span><span class="p">,</span> <span class="s">"f"</span><span class="p">)</span>
 
 <span class="c">// copy</span>
-<span class="n">c</span><span class="o">:</span> <span class="o">=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">string</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
-<span class="nb">copy</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">string</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+<span class="nb">copy</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
 
 <span class="c">// remove</span>
 <span class="n">r</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"a"</span><span class="p">,</span> <span class="s">"x"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"c"</span><span class="p">}</span> 
@@ -603,7 +606,119 @@ world`</span><span class="p">;</span>
 <span class="c">// r1 =&gt; [a b c]</span>
 
 
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div><h4 id='maps'>Maps</h4><h4 id='ranges'>Ranges</h4><h2 id='custom-data-types'>Custom data types</h2><h2 id='conditional'>Conditional</h2><h3 id='if-else'>If/Else</h3><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// simple</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">xs</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">];</span>
+<span class="c1">// sub array/list</span>
+<span class="nx">xs</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// =&gt; ['a', 'b']</span>
+<span class="c1">// append</span>
+<span class="nx">xs</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">d</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// =&gt; ['a', 'b', 'c', 'd'];</span>
+<span class="c1">// pop</span>
+<span class="nx">xs</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span> <span class="c1">// =&gt; 'd', xs becomes ['a', 'b', 'c']</span>
+<span class="c1">// copy</span>
+<span class="nx">xs</span><span class="p">.</span><span class="nx">slice</span><span class="p">();</span> <span class="c1">// =&gt; ['a', 'b', 'c']</span>
+<span class="c1">// remove 'b'</span>
+<span class="nx">xs</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// 'b', xs == ['a', 'c']</span>
+</code></pre></div>
+<p>In Golang, Slice is usually used instead of List, due to it&#39;s first-class suppport in syntax and performance advantage. </p>
+
+<table><thead>
+<tr>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Define &amp; Initialization</td>
+<td><code>int{}</code> or <code>make([]int, 5, 5)</code></td>
+<td><code>const xs = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</code></td>
+</tr>
+<tr>
+<td>append</td>
+<td><code>append(xs, &quot;e&quot;, &quot;f&quot;)</code></td>
+<td><code>xs.push(&#39;e&#39;)</code></td>
+</tr>
+<tr>
+<td>Pop</td>
+<td><code>xs[:len(xs) -1]</code></td>
+<td><code>xs.pop()</code></td>
+</tr>
+<tr>
+<td>sub-list</td>
+<td><code>xs[a:b]</code></td>
+<td><code>xs.slice(a,b)</code></td>
+</tr>
+<tr>
+<td>copy</td>
+<td><code>copy(target, source)</code></td>
+<td><code>xs.slice()</code></td>
+</tr>
+<tr>
+<td>remove</td>
+<td>via <code>append</code></td>
+<td>via <code>splice</code></td>
+</tr>
+</tbody></table>
+<h4 id='maps'>Maps</h4><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// create empty map</span>
+<span class="n">m</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span>
+
+<span class="c">// create with initial values</span>
+<span class="n">m</span><span class="o">:</span> <span class="o">=</span> <span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="s">"foo"</span><span class="o">:</span> <span class="m">1</span><span class="p">,</span> <span class="s">"bar"</span><span class="o">:</span> <span class="m">2</span><span class="p">}</span>
+
+<span class="c">// put value</span>
+<span class="n">m</span><span class="p">[</span><span class="s">"k1"</span><span class="p">]</span> <span class="o">=</span> <span class="m">49</span>
+<span class="n">m</span><span class="p">[</span><span class="s">"k2"</span><span class="p">]</span> <span class="o">=</span> <span class="m">81</span>
+
+<span class="c">// get value</span>
+<span class="n">m</span><span class="p">[</span><span class="s">"k1"</span><span class="p">]</span> <span class="c">//=&gt; 49</span>
+
+<span class="c">// delete k-v</span>
+<span class="n">delelte</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s">"k2"</span><span class="p">)</span>
+
+<span class="c">// iterate</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">m</span> <span class="p">{</span>
+  <span class="c">// do something with k and v</span>
+<span class="p">}</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// create empty map</span>
+<span class="kd">let</span> <span class="nx">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">();</span>
+
+<span class="c1">// create with initial values</span>
+<span class="kd">let</span> <span class="nx">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">([[</span><span class="dl">"</span><span class="s2">foo</span><span class="dl">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="dl">"</span><span class="s2">bar</span><span class="dl">"</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]);</span>
+
+<span class="c1">// put value</span>
+<span class="nx">m</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">k1</span><span class="dl">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="c1">// get value</span>
+<span class="nx">m</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">k1</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// delete k-v</span>
+<span class="nx">m</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="dl">"</span><span class="s2">k1</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// iterate</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="p">[</span><span class="nx">k</span><span class="p">,</span> <span class="nx">v</span><span class="p">]</span> <span class="k">of</span> <span class="nx">m</span><span class="p">.</span><span class="nx">entries</span><span class="p">())</span> <span class="p">{</span>
+  <span class="c1">// do something with k and v</span>
+<span class="p">}</span>
+
+</code></pre></div>
+<table><thead>
+<tr>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Define</td>
+<td><code>make(map[string]int)</code></td>
+<td><code>new Map()</code></td>
+</tr>
+<tr>
+<td>Initialization</td>
+<td><code>map[string]int{&quot;foo&quot;: 1, &quot;bar&quot;: 2}</code></td>
+<td><code>new Map([[&quot;foo&quot;, 1], [&quot;bar&quot;, 2]])</code></td>
+</tr>
+</tbody></table>
+<h4 id='ranges'>Ranges</h4><h2 id='custom-data-types'>Custom data types</h2><h2 id='conditional-if-else'>Conditional - If/Else</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// simple</span>
 <span class="k">if</span> <span class="m">7</span> <span class="o">%</span> <span class="m">2</span> <span class="o">==</span> <span class="m">0</span> <span class="p">{</span>
   <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"7 is even"</span><span class="p">)</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -618,7 +733,7 @@ world`</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s">"has multiple digits"</span><span class="p">)</span>
 <span class="p">}</span>
-</code></pre></div><h3 id='switch'>Switch</h3><div class="highlight"><pre class="highlight go tab-go"><code>
+</code></pre></div><h2 id='conditional-switch'>Conditional - Switch</h2><div class="highlight"><pre class="highlight go tab-go"><code>
 <span class="c">// simple</span>
 <span class="n">i</span> <span class="o">:=</span> <span class="m">2</span>
 <span class="n">fmt</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="s">"Write "</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s">" as "</span><span class="p">)</span>
