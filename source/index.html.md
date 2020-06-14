@@ -11,7 +11,6 @@ toc_footers:
 
 includes:
   - basics
-  - basics/_modules
   - intermediate
   - advanced
   - further

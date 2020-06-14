@@ -153,11 +153,9 @@ const t = true;
 | feature \ lang | Go     | JS                                                         |
 | -------------- | ------ | ---------------------------------------------------------- |
 | Truthy         | `true` | `true`, others values not listed below                     |
-| Falsy          | `true` | `false`, `0`, `-0`, `0n`, `""`, `null`, `undefined`, `NaN` |
+| Falsy          | `false` | `false`, `0`, `-0`, `0n`, `""`, `null`, `undefined`, `NaN` |
 
-### Collections
-
-#### Arrays
+## Collections/Arrays
 ```go
 var xs [5]int = [5]int{1, 2, 3, 4, 5}
 xs := [5]int{1, 2, 3, 4, 5} // or [...]int{1, 2, 3, 4, 5}
@@ -199,7 +197,7 @@ const carsRef = cars;
 | Copy Array              | `ys := xs`                 | `ys = xs.slice()` or `ys = [...xs]` |
 
 
-#### List or List-like structure
+## Collections/List(or List-like structure)
 ```go
 // slice literal
 letters := []string{"a", "b", "c", "d"}
@@ -260,7 +258,7 @@ In Golang, Slice is usually used instead of List, due to it's first-class supppo
 | remove                  | via `append`                   | via `splice`                 |
 
 
-#### Maps
+## Collections/Maps
 
 ```go
 // create empty map
@@ -309,17 +307,63 @@ for (let [k, v] of m.entries()) {
 
 ```
 
-| feature \ lang | Go                                   | JS                                 |
-| -------------- | ------------------------------------ | ---------------------------------- |
-| Define         | `make(map[string]int)`               | `new Map()`                        |
+| feature \ lang | Go                                   | JS                                  |
+| -------------- | ------------------------------------ | ----------------------------------- |
+| Define         | `make(map[string]int)`               | `new Map()`                         |
 | Initialization | `map[string]int{"foo": 1, "bar": 2}` | `new Map([["foo", 1], ["bar", 2]])` |
 
 
-#### Ranges
+## Collections/Iterator(or Range)
+```go
+// iterate over an array
+nums := []int{2, 3, 4}
+sum := 0
+for _, num := range nums {
+    sum += num
+}
 
-## Custom data types
+// iterate over an map
+kvs := map[string]string{"a": "apple", "b": "banana"}
+for k, v := range kvs {
+    fmt.Printf("%s -> %s\n", k, v)
+}
+```
 
-## Conditional - If/Else
+```javascript
+// iterate over an array
+const array1 = ['a', 'b', 'c'];
+for (const element of array1) {
+  console.log(element);
+}
+
+// iterate over an Map
+const myMap = new Map();
+myMap.set("0", "foo");
+myMap.set("1", "bar");
+myMap.set("2", "baz");
+
+for (const [key, value] of myMap.entries()) {
+  console.log(`${key} -> ${value}`);
+}
+
+// iterate over an object - method 1
+for (const [key, value] of Object.entries(obj)) {
+  console.log(`${key} -> ${value}`);
+}
+
+// iterate over an object - method 2
+for (const k in obj) {
+  console.log(`${k} -> ${obj[k]}`);
+}
+
+```
+
+| feature \ lang | Go                                   | JS                                 |
+| -------------- | ------------------------------------ | ---------------------------------- |
+| Syntax         | `for i, value := range iterable {} ` | `for (const value of iterable) {}` |
+
+
+## Conditional/If-Else
 
 ```go
 // simple
@@ -339,7 +383,22 @@ if num := 9; num < 0 {
 }
 ```
 
-## Conditional - Switch
+```javascript
+let x = 7;
+if (x % 2 === 0 ) {
+  console.log(`${x} is even`);
+} else {
+  console.log(`${x} is odd`);
+}
+
+```
+
+| feature \ lang | Go           | JS           |
+| -------------- | ------------ | ------------ |
+| Keywords       | `if`, `else` | `if`, `else` |
+
+
+## Conditional/Switch
 ```go
 
 // simple
@@ -388,7 +447,49 @@ whatAmI("hey")
 
 ```
 
-## Loops
+```javascript
+const expr = 'Papayas';
+switch (expr) {
+  case 'Oranges':
+    console.log('Oranges are $0.59 a pound.');
+    break;
+  case 'Mangoes':
+  case 'Papayas':
+    console.log('Mangoes and papayas are $2.79 a pound.');
+    // expected output: "Mangoes and papayas are $2.79 a pound."
+    break;
+  default:
+    console.log(`Sorry, we are out of ${expr}.`);
+}
+
+```
+
+| feature \ lang | Go                          | JS                                   |
+| -------------- | --------------------------- | ------------------------------------ |
+| Keywords       | `switch`, `case`, `default` | `switch`, `case`, `default`, `break` |
+
+
+## Loops/for
+```go
+// classic for loop
+for j := 0; j < 10; j++ {
+  fmt.Println(j)
+}
+```
+```javascript
+let str = '';
+for (let i = 0; i < 9; i++) {
+  str = str + i;
+}
+console.log(str);
+```
+
+| feature \ lang | Go    | JS    |
+| -------------- | ----- | ----- |
+| Keywords       | `for` | `for` |
+
+
+## Loops/while
 ```go
 // while loop equivalent
 i := 1
@@ -402,11 +503,16 @@ for {
   fmt.Prinlnt("loop")
   break
 }
+```
+```javascript
+let n = 0;
 
-// classic for loop
-for j := 0; j < 10; j++ {
-  fmt.Println(j)
+while (n < 3) {
+  n++;
 }
 ```
 
-## Paradigms: OOP, FP etc
+| feature \ lang | Go    | JS      |
+| -------------- | ----- | ------- |
+| Keywords       | `for` | `while` |
+
