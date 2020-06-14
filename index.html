@@ -232,28 +232,43 @@
                     <a href="#built-in-data-types" class="toc-h2 toc-link" data-title="Built-in Data types">Built-in Data types</a>
                   </li>
                   <li>
-                    <a href="#custom-data-types" class="toc-h2 toc-link" data-title="Custom data types">Custom data types</a>
+                    <a href="#collections-arrays" class="toc-h2 toc-link" data-title="Collections/Arrays">Collections/Arrays</a>
                   </li>
                   <li>
-                    <a href="#conditional-if-else" class="toc-h2 toc-link" data-title="Conditional - If/Else">Conditional - If/Else</a>
+                    <a href="#collections-list-or-list-like-structure" class="toc-h2 toc-link" data-title="Collections/List(or List-like structure)">Collections/List(or List-like structure)</a>
                   </li>
                   <li>
-                    <a href="#conditional-switch" class="toc-h2 toc-link" data-title="Conditional - Switch">Conditional - Switch</a>
+                    <a href="#collections-maps" class="toc-h2 toc-link" data-title="Collections/Maps">Collections/Maps</a>
                   </li>
                   <li>
-                    <a href="#loops" class="toc-h2 toc-link" data-title="Loops">Loops</a>
+                    <a href="#collections-iterator-or-range" class="toc-h2 toc-link" data-title="Collections/Iterator(or Range)">Collections/Iterator(or Range)</a>
                   </li>
                   <li>
-                    <a href="#paradigms-oop-fp-etc" class="toc-h2 toc-link" data-title="Paradigms: OOP, FP etc">Paradigms: OOP, FP etc</a>
+                    <a href="#conditional-if-else" class="toc-h2 toc-link" data-title="Conditional/If-Else">Conditional/If-Else</a>
                   </li>
                   <li>
-                    <a href="#modules" class="toc-h2 toc-link" data-title="Modules">Modules</a>
+                    <a href="#conditional-switch" class="toc-h2 toc-link" data-title="Conditional/Switch">Conditional/Switch</a>
+                  </li>
+                  <li>
+                    <a href="#loops-for" class="toc-h2 toc-link" data-title="Loops/for">Loops/for</a>
+                  </li>
+                  <li>
+                    <a href="#loops-while" class="toc-h2 toc-link" data-title="Loops/while">Loops/while</a>
                   </li>
               </ul>
           </li>
           <li>
             <a href="#2-intermediate" class="toc-h1 toc-link" data-title="2. Intermediate">2. Intermediate</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#code-organization-classes" class="toc-h2 toc-link" data-title="Code Organization/classes">Code Organization/classes</a>
+                  </li>
+                  <li>
+                    <a href="#code-organization-modules" class="toc-h2 toc-link" data-title="Code Organization/modules">Code Organization/modules</a>
+                  </li>
+                  <li>
+                    <a href="#code-organization-other" class="toc-h2 toc-link" data-title="Code Organization/other">Code Organization/other</a>
+                  </li>
                   <li>
                     <a href="#io-file-read-write" class="toc-h2 toc-link" data-title="IO, file read/write">IO, file read/write</a>
                   </li>
@@ -515,11 +530,11 @@ world`</span><span class="p">;</span>
 </tr>
 <tr>
 <td>Falsy</td>
-<td><code>true</code></td>
+<td><code>false</code></td>
 <td><code>false</code>, <code>0</code>, <code>-0</code>, <code>0n</code>, <code>&quot;&quot;</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code></td>
 </tr>
 </tbody></table>
-<h3 id='collections'>Collections</h3><h4 id='arrays'>Arrays</h4><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">xs</span> <span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="kt">int</span> <span class="o">=</span> <span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">5</span><span class="p">}</span>
+<h2 id='collections-arrays'>Collections/Arrays</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">var</span> <span class="n">xs</span> <span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="kt">int</span> <span class="o">=</span> <span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">5</span><span class="p">}</span>
 <span class="n">xs</span> <span class="o">:=</span> <span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">5</span><span class="p">}</span> <span class="c">// or [...]int{1, 2, 3, 4, 5}</span>
 
 <span class="k">var</span> <span class="n">twoD</span> <span class="p">[</span><span class="m">2</span><span class="p">][</span><span class="m">3</span><span class="p">]</span><span class="kt">int</span>
@@ -575,7 +590,7 @@ world`</span><span class="p">;</span>
 <td><code>ys = xs.slice()</code> or <code>ys = [...xs]</code></td>
 </tr>
 </tbody></table>
-<h4 id='list-or-list-like-structure'>List or List-like structure</h4><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// slice literal</span>
+<h2 id='collections-list-or-list-like-structure'>Collections/List(or List-like structure)</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// slice literal</span>
 <span class="n">letters</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"a"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"c"</span><span class="p">,</span> <span class="s">"d"</span><span class="p">}</span>
 
 <span class="c">// using function make</span>
@@ -658,7 +673,7 @@ world`</span><span class="p">;</span>
 <td>via <code>splice</code></td>
 </tr>
 </tbody></table>
-<h4 id='maps'>Maps</h4><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// create empty map</span>
+<h2 id='collections-maps'>Collections/Maps</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// create empty map</span>
 <span class="n">m</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span>
 
 <span class="c">// create with initial values</span>
@@ -718,7 +733,59 @@ world`</span><span class="p">;</span>
 <td><code>new Map([[&quot;foo&quot;, 1], [&quot;bar&quot;, 2]])</code></td>
 </tr>
 </tbody></table>
-<h4 id='ranges'>Ranges</h4><h2 id='custom-data-types'>Custom data types</h2><h2 id='conditional-if-else'>Conditional - If/Else</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// simple</span>
+<h2 id='collections-iterator-or-range'>Collections/Iterator(or Range)</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// iterate over an array</span>
+<span class="n">nums</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">}</span>
+<span class="n">sum</span> <span class="o">:=</span> <span class="m">0</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">num</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">nums</span> <span class="p">{</span>
+    <span class="n">sum</span> <span class="o">+=</span> <span class="n">num</span>
+<span class="p">}</span>
+
+<span class="c">// iterate over an map</span>
+<span class="n">kvs</span> <span class="o">:=</span> <span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">"a"</span><span class="o">:</span> <span class="s">"apple"</span><span class="p">,</span> <span class="s">"b"</span><span class="o">:</span> <span class="s">"banana"</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">kvs</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"%s -&gt; %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// iterate over an array</span>
+<span class="kd">const</span> <span class="nx">array1</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">];</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">element</span> <span class="k">of</span> <span class="nx">array1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// iterate over an Map</span>
+<span class="kd">const</span> <span class="nx">myMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">();</span>
+<span class="nx">myMap</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">foo</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myMap</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">bar</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myMap</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">2</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">baz</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">]</span> <span class="k">of</span> <span class="nx">myMap</span><span class="p">.</span><span class="nx">entries</span><span class="p">())</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">key</span><span class="p">}</span><span class="s2"> -&gt; </span><span class="p">${</span><span class="nx">value</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// iterate over an object - method 1</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="p">[</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">]</span> <span class="k">of</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">obj</span><span class="p">))</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">key</span><span class="p">}</span><span class="s2"> -&gt; </span><span class="p">${</span><span class="nx">value</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// iterate over an object - method 2</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">k</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">k</span><span class="p">}</span><span class="s2"> -&gt; </span><span class="p">${</span><span class="nx">obj</span><span class="p">[</span><span class="nx">k</span><span class="p">]}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></div>
+<table><thead>
+<tr>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Syntax</td>
+<td><code>for i, value := range iterable {}</code></td>
+<td><code>for (const value of iterable) {}</code></td>
+</tr>
+</tbody></table>
+<h2 id='conditional-if-else'>Conditional/If-Else</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// simple</span>
 <span class="k">if</span> <span class="m">7</span> <span class="o">%</span> <span class="m">2</span> <span class="o">==</span> <span class="m">0</span> <span class="p">{</span>
   <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"7 is even"</span><span class="p">)</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -733,7 +800,28 @@ world`</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s">"has multiple digits"</span><span class="p">)</span>
 <span class="p">}</span>
-</code></pre></div><h2 id='conditional-switch'>Conditional - Switch</h2><div class="highlight"><pre class="highlight go tab-go"><code>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2"> is even`</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2"> is odd`</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></div>
+<table><thead>
+<tr>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Keywords</td>
+<td><code>if</code>, <code>else</code></td>
+<td><code>if</code>, <code>else</code></td>
+</tr>
+</tbody></table>
+<h2 id='conditional-switch'>Conditional/Switch</h2><div class="highlight"><pre class="highlight go tab-go"><code>
 <span class="c">// simple</span>
 <span class="n">i</span> <span class="o">:=</span> <span class="m">2</span>
 <span class="n">fmt</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="s">"Write "</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s">" as "</span><span class="p">)</span>
@@ -778,7 +866,58 @@ world`</span><span class="p">;</span>
 <span class="n">whatAmI</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
 <span class="n">whatAmI</span><span class="p">(</span><span class="s">"hey"</span><span class="p">)</span>
 
-</code></pre></div><h2 id='loops'>Loops</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// while loop equivalent</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">expr</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Papayas</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">switch</span> <span class="p">(</span><span class="nx">expr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">case</span> <span class="dl">'</span><span class="s1">Oranges</span><span class="dl">'</span><span class="p">:</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Oranges are $0.59 a pound.</span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="dl">'</span><span class="s1">Mangoes</span><span class="dl">'</span><span class="p">:</span>
+  <span class="k">case</span> <span class="dl">'</span><span class="s1">Papayas</span><span class="dl">'</span><span class="p">:</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Mangoes and papayas are $2.79 a pound.</span><span class="dl">'</span><span class="p">);</span>
+    <span class="c1">// expected output: "Mangoes and papayas are $2.79 a pound."</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="nl">default</span><span class="p">:</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Sorry, we are out of </span><span class="p">${</span><span class="nx">expr</span><span class="p">}</span><span class="s2">.`</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></div>
+<table><thead>
+<tr>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Keywords</td>
+<td><code>switch</code>, <code>case</code>, <code>default</code></td>
+<td><code>switch</code>, <code>case</code>, <code>default</code>, <code>break</code></td>
+</tr>
+</tbody></table>
+<h2 id='loops-for'>Loops/for</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// classic for loop</span>
+<span class="k">for</span> <span class="n">j</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="m">10</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span> <span class="p">{</span>
+  <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">str</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">str</span> <span class="o">=</span> <span class="nx">str</span> <span class="o">+</span> <span class="nx">i</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Keywords</td>
+<td><code>for</code></td>
+<td><code>for</code></td>
+</tr>
+</tbody></table>
+<h2 id='loops-while'>Loops/while</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// while loop equivalent</span>
 <span class="n">i</span> <span class="o">:=</span> <span class="m">1</span>
 <span class="k">for</span> <span class="n">i</span> <span class="o">&lt;=</span><span class="m">3</span> <span class="p">{</span>
   <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
@@ -790,14 +929,28 @@ world`</span><span class="p">;</span>
   <span class="n">fmt</span><span class="o">.</span><span class="n">Prinlnt</span><span class="p">(</span><span class="s">"loop"</span><span class="p">)</span>
   <span class="k">break</span>
 <span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="c">// classic for loop</span>
-<span class="k">for</span> <span class="n">j</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="m">10</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span> <span class="p">{</span>
-  <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">n</span><span class="o">++</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div><h2 id='paradigms-oop-fp-etc'>Paradigms: OOP, FP etc</h2><h2 id='modules'>Modules</h2>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Keywords</td>
+<td><code>for</code></td>
+<td><code>while</code></td>
+</tr>
+</tbody></table>
+<h1 id='2-intermediate'>2. Intermediate</h1><h2 id='code-organization-classes'>Code Organization/classes</h2><h2 id='code-organization-modules'>Code Organization/modules</h2>
 <p>testing modules</p>
-<h1 id='2-intermediate'>2. Intermediate</h1><h2 id='io-file-read-write'>IO, file read/write</h2><h2 id='json-deserialize-serialize'>JSON deserialize/serialize</h2><h2 id='http-client-http-server'>Http Client / Http Server</h2><h2 id='dependency-management'>Dependency Management</h2><h2 id='project-structure'>Project Structure</h2><h1 id='3-advanced'>3. Advanced</h1><h2 id='garbage-collection-amp-memory-leaks'>Garbage collection &amp; Memory leaks</h2><h2 id='memory-model'>Memory model</h2><h2 id='concurrency'>Concurrency</h2><h2 id='popular-and-useful-libraries'>Popular and useful libraries</h2><h1 id='4-further'>4. Further</h1><h2 id='language-caveats'>Language Caveats</h2><h2 id='new-features'>New features</h2><h2 id='interact-with-other-languages'>Interact with other languages</h2><h2 id='frontend-webassembly'>Frontend - WebAssembly</h2><h2 id='trend-in-other-areas-other-than-backend'>Trend in other areas other than backend</h2><h1 id='errors'>Errors</h1>
+<h2 id='code-organization-other'>Code Organization/other</h2><h2 id='io-file-read-write'>IO, file read/write</h2><h2 id='json-deserialize-serialize'>JSON deserialize/serialize</h2><h2 id='http-client-http-server'>Http Client / Http Server</h2><h2 id='dependency-management'>Dependency Management</h2><h2 id='project-structure'>Project Structure</h2><h1 id='3-advanced'>3. Advanced</h1><h2 id='garbage-collection-amp-memory-leaks'>Garbage collection &amp; Memory leaks</h2><h2 id='memory-model'>Memory model</h2><h2 id='concurrency'>Concurrency</h2><h2 id='popular-and-useful-libraries'>Popular and useful libraries</h2><h1 id='4-further'>4. Further</h1><h2 id='language-caveats'>Language Caveats</h2><h2 id='new-features'>New features</h2><h2 id='interact-with-other-languages'>Interact with other languages</h2><h2 id='frontend-webassembly'>Frontend - WebAssembly</h2><h2 id='trend-in-other-areas-other-than-backend'>Trend in other areas other than backend</h2><h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
