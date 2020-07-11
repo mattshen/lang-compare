@@ -261,13 +261,22 @@
             <a href="#2-intermediate" class="toc-h1 toc-link" data-title="2. Intermediate">2. Intermediate</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#code-organization-classes" class="toc-h2 toc-link" data-title="Code Organization/classes">Code Organization/classes</a>
+                    <a href="#pointers-references-pass-by" class="toc-h2 toc-link" data-title="pointers / references / pass-by-???">pointers / references / pass-by-???</a>
                   </li>
                   <li>
-                    <a href="#code-organization-modules" class="toc-h2 toc-link" data-title="Code Organization/modules">Code Organization/modules</a>
+                    <a href="#class-struct" class="toc-h2 toc-link" data-title="class/struct">class/struct</a>
                   </li>
                   <li>
-                    <a href="#code-organization-other" class="toc-h2 toc-link" data-title="Code Organization/other">Code Organization/other</a>
+                    <a href="#object" class="toc-h2 toc-link" data-title="object">object</a>
+                  </li>
+                  <li>
+                    <a href="#interface" class="toc-h2 toc-link" data-title="interface">interface</a>
+                  </li>
+                  <li>
+                    <a href="#classes" class="toc-h2 toc-link" data-title="classes">classes</a>
+                  </li>
+                  <li>
+                    <a href="#modules-packages" class="toc-h2 toc-link" data-title="modules / packages">modules / packages</a>
                   </li>
                   <li>
                     <a href="#io-file-read-write" class="toc-h2 toc-link" data-title="IO, file read/write">IO, file read/write</a>
@@ -948,9 +957,153 @@ world`</span><span class="p">;</span>
 <td><code>while</code></td>
 </tr>
 </tbody></table>
-<h1 id='2-intermediate'>2. Intermediate</h1><h2 id='code-organization-classes'>Code Organization/classes</h2><h2 id='code-organization-modules'>Code Organization/modules</h2>
+<h1 id='2-intermediate'>2. Intermediate</h1><h2 id='pointers-references-pass-by'>pointers / references / pass-by-???</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">func</span> <span class="n">zeroval</span><span class="p">(</span><span class="n">ival</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ival</span> <span class="o">=</span> <span class="m">0</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">zeroptr</span><span class="p">(</span><span class="n">iptr</span> <span class="o">*</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">*</span><span class="n">iptr</span> <span class="o">=</span> <span class="m">0</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">i</span> <span class="o">:=</span> <span class="m">1</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"initial:"</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+    <span class="n">zeroval</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"zeroval:"</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">zeroptr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"zeroptr:"</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"pointer:"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">)</span>
+
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">changeStuff</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">a</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">*</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="nx">b</span><span class="p">.</span><span class="nx">item</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">changed</span><span class="dl">"</span><span class="p">;</span>
+  <span class="nx">c</span> <span class="o">=</span> <span class="p">{</span><span class="na">item</span><span class="p">:</span> <span class="dl">"</span><span class="s2">changed</span><span class="dl">"</span><span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">num</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span><span class="na">item</span><span class="p">:</span> <span class="dl">"</span><span class="s2">unchanged</span><span class="dl">"</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span><span class="na">item</span><span class="p">:</span> <span class="dl">"</span><span class="s2">unchanged</span><span class="dl">"</span><span class="p">};</span>
+
+<span class="nx">changeStuff</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span> <span class="nx">obj1</span><span class="p">,</span> <span class="nx">obj2</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span> <span class="c1">// =&gt; 10</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj1</span><span class="p">.</span><span class="nx">item</span><span class="p">);</span> <span class="c1">// =&gt; changed</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj2</span><span class="p">.</span><span class="nx">item</span><span class="p">);</span> <span class="c1">// =&gt; unchanged</span>
+</code></pre></div>
+<p>From programmer&#39;s perspective, we can always think it&#39;s passing value for both golang and javascript. </p>
+
+<p>For <strong>golang</strong>, it&#39;s either passing a normal value (a copy of the orginal vlaue), or passing a reference value.
+For a reference value, dereference (<code>*</code>) is required to access the value. </p>
+
+<p>For <strong>javascript</strong>, it&#39;s the same. However there are two differences as compared to golang:
+- programmer doesn&#39;t have control to passing a normal value or a reference value.
+- dereference happens implicitly (with <code>.</code>). </p>
+<h2 id='class-struct'>class/struct</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// define struct</span>
+<span class="k">type</span> <span class="n">person</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="n">name</span> <span class="kt">string</span>
+  <span class="n">age</span>  <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="c">// instantiate</span>
+<span class="n">p1</span> <span class="o">:=</span> <span class="n">person</span><span class="p">{</span><span class="n">name</span><span class="o">:</span> <span class="s">"Alice"</span><span class="p">,</span> <span class="n">age</span><span class="o">:</span> <span class="m">30</span><span class="p">}</span>
+<span class="n">p2</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">person</span><span class="p">{</span><span class="n">name</span><span class="o">:</span> <span class="s">"Bob"</span><span class="p">,</span> <span class="n">age</span><span class="o">:</span> <span class="m">29</span><span class="p">}</span>
+
+<span class="c">// change prop's value</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="m">40</span>
+<span class="p">(</span><span class="o">*</span><span class="n">p2</span><span class="p">)</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="m">39</span> <span class="c">// or p2.age = 39 (where auto deferencing happens)</span>
+
+<span class="c">// print objects</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span> <span class="c">// =&gt; {Alice 40}</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span> <span class="c">// =&gt; &amp;{Bob 39}</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// define pre-ES6</span>
+<span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// since ES6</span>
+<span class="kd">class</span> <span class="nx">PersonES6</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// instantiate</span>
+<span class="kd">const</span> <span class="nx">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PersonES6</span><span class="p">(</span><span class="dl">"</span><span class="s2">Bob</span><span class="dl">"</span><span class="p">,</span> <span class="mi">29</span><span class="p">);</span>
+
+<span class="c1">// change prop's value</span>
+<span class="nx">p1</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">40</span><span class="p">;</span>
+<span class="nx">p2</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">39</span><span class="p">;</span>
+
+<span class="c1">// print objects</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p1</span><span class="p">);</span> <span class="c1">// =&gt; Person { name: 'Alice', age: 40 }</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p2</span><span class="p">);</span> <span class="c1">// =&gt; PersonES6 { name: 'Bob', age: 39 }</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>keyword</td>
+<td><strong>struct</strong>, <strong>type</strong></td>
+<td><strong>class</strong></td>
+</tr>
+</tbody></table>
+<h2 id='object'>object</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">type</span> <span class="n">person</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="n">name</span> <span class="kt">string</span>
+  <span class="n">age</span>  <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="n">p1</span> <span class="o">:=</span> <span class="n">person</span><span class="p">{</span><span class="n">name</span><span class="o">:</span> <span class="s">"Alice"</span><span class="p">,</span> <span class="n">age</span><span class="o">:</span> <span class="m">30</span><span class="p">}</span> <span class="c">// struct literal</span>
+<span class="k">var</span> <span class="n">p2</span> <span class="o">*</span><span class="n">person</span> <span class="o">=</span> <span class="nb">new</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>         <span class="c">// with new keyword, it returns a pointer</span>
+<span class="n">p2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">"Bob"</span>
+<span class="n">p2</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="m">29</span>
+
+<span class="c">// print objects</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span> <span class="c">// =&gt; {Alice 30}</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span> <span class="c">// =&gt; &amp;{Bob 29}</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">class</span> <span class="nx">PersonES6</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PersonES6</span><span class="p">(</span><span class="dl">"</span><span class="s2">Alice</span><span class="dl">"</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">p2</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bob</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="mi">29</span><span class="p">};</span> <span class="c1">// object literal, similar to strut literal</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p1</span><span class="p">);</span> <span class="c1">// PersonES6 { name: 'Alice', age: 30 }</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p2</span><span class="p">);</span> <span class="c1">// =&gt; { name: 'Bob', age: 29 }</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>feature \ lang</th>
+<th>Go</th>
+<th>JS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>keyword</td>
+<td><strong>new</strong></td>
+<td><strong>new</strong></td>
+</tr>
+<tr>
+<td>support literal</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+</tbody></table>
+<h2 id='interface'>interface</h2><h2 id='classes'>classes</h2><h2 id='modules-packages'>modules / packages</h2>
 <p>testing modules</p>
-<h2 id='code-organization-other'>Code Organization/other</h2><h2 id='io-file-read-write'>IO, file read/write</h2><h2 id='json-deserialize-serialize'>JSON deserialize/serialize</h2><h2 id='http-client-http-server'>Http Client / Http Server</h2><h2 id='dependency-management'>Dependency Management</h2><h2 id='project-structure'>Project Structure</h2><h1 id='3-advanced'>3. Advanced</h1><h2 id='garbage-collection-amp-memory-leaks'>Garbage collection &amp; Memory leaks</h2><h2 id='memory-model'>Memory model</h2><h2 id='concurrency'>Concurrency</h2><h2 id='popular-and-useful-libraries'>Popular and useful libraries</h2><h1 id='4-further'>4. Further</h1><h2 id='language-caveats'>Language Caveats</h2><h2 id='new-features'>New features</h2><h2 id='interact-with-other-languages'>Interact with other languages</h2><h2 id='frontend-webassembly'>Frontend - WebAssembly</h2><h2 id='trend-in-other-areas-other-than-backend'>Trend in other areas other than backend</h2><h1 id='errors'>Errors</h1>
+<h2 id='io-file-read-write'>IO, file read/write</h2><h2 id='json-deserialize-serialize'>JSON deserialize/serialize</h2><h2 id='http-client-http-server'>Http Client / Http Server</h2><h2 id='dependency-management'>Dependency Management</h2><h2 id='project-structure'>Project Structure</h2><h1 id='3-advanced'>3. Advanced</h1><h2 id='garbage-collection-amp-memory-leaks'>Garbage collection &amp; Memory leaks</h2><h2 id='memory-model'>Memory model</h2><h2 id='concurrency'>Concurrency</h2><h2 id='popular-and-useful-libraries'>Popular and useful libraries</h2><h1 id='4-further'>4. Further</h1><h2 id='language-caveats'>Language Caveats</h2><h2 id='new-features'>New features</h2><h2 id='interact-with-other-languages'>Interact with other languages</h2><h2 id='frontend-webassembly'>Frontend - WebAssembly</h2><h2 id='trend-in-other-areas-other-than-backend'>Trend in other areas other than backend</h2><h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
