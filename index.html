@@ -270,10 +270,13 @@
                     <a href="#object" class="toc-h2 toc-link" data-title="object">object</a>
                   </li>
                   <li>
+                    <a href="#methods" class="toc-h2 toc-link" data-title="methods">methods</a>
+                  </li>
+                  <li>
                     <a href="#interface" class="toc-h2 toc-link" data-title="interface">interface</a>
                   </li>
                   <li>
-                    <a href="#classes" class="toc-h2 toc-link" data-title="classes">classes</a>
+                    <a href="#error-handling" class="toc-h2 toc-link" data-title="error handling">error handling</a>
                   </li>
                   <li>
                     <a href="#modules-packages" class="toc-h2 toc-link" data-title="modules / packages">modules / packages</a>
@@ -1101,7 +1104,107 @@ For a reference value, dereference (<code>*</code>) is required to access the va
 <td>yes</td>
 </tr>
 </tbody></table>
-<h2 id='interface'>interface</h2><h2 id='classes'>classes</h2><h2 id='modules-packages'>modules / packages</h2>
+<h2 id='methods'>methods</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">type</span> <span class="n">rect</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="kt">int</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="p">(</span><span class="n">r</span> <span class="o">*</span><span class="n">rect</span><span class="p">)</span> <span class="n">area</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">r</span><span class="o">.</span><span class="n">height</span>
+<span class="p">}</span>
+<span class="n">r</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">rect</span><span class="p">{</span><span class="n">width</span><span class="o">:</span> <span class="m">2</span><span class="p">,</span> <span class="n">height</span><span class="o">:</span> <span class="m">4</span><span class="p">}</span>
+<span class="k">var</span> <span class="n">area</span> <span class="kt">int</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">area</span><span class="p">()</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">area</span><span class="p">)</span> <span class="c">// =&gt; 8</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">r1</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">width</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="na">height</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="na">area</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">r1</span><span class="p">.</span><span class="nx">area</span><span class="p">());</span>
+<span class="c1">// or </span>
+<span class="kd">class</span> <span class="nx">Rect</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">area</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">new</span> <span class="nx">Rect</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">).</span><span class="nx">area</span><span class="p">())</span>
+</code></pre></div>
+<p>Javascript&#39;s way of attaching function to object/class is quite traditional. </p>
+
+<p>Golang&#39;s way is sort of &quot;de-coupled&quot;. </p>
+<h2 id='interface'>interface</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">type</span> <span class="n">geometry</span> <span class="k">interface</span> <span class="p">{</span>
+    <span class="n">area</span><span class="p">()</span> <span class="kt">float64</span>
+    <span class="n">perim</span><span class="p">()</span> <span class="kt">float64</span>
+<span class="p">}</span>
+
+<span class="k">type</span> <span class="n">rect</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="kt">float64</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="n">r</span> <span class="n">rect</span><span class="p">)</span> <span class="n">area</span><span class="p">()</span> <span class="kt">float64</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">r</span><span class="o">.</span><span class="n">height</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="n">r</span> <span class="n">rect</span><span class="p">)</span> <span class="n">perim</span><span class="p">()</span> <span class="kt">float64</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="m">2</span><span class="o">*</span><span class="n">r</span><span class="o">.</span><span class="n">width</span> <span class="o">+</span> <span class="m">2</span><span class="o">*</span><span class="n">r</span><span class="o">.</span><span class="n">height</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">measure</span><span class="p">(</span><span class="n">g</span> <span class="n">geometry</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Geometry %#v, area=%f, perimeter=%f </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">area</span><span class="p">(),</span> <span class="n">g</span><span class="o">.</span><span class="n">perim</span><span class="p">())</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">:=</span> <span class="n">rect</span><span class="p">{</span><span class="n">width</span><span class="o">:</span> <span class="m">3</span><span class="p">,</span> <span class="n">height</span><span class="o">:</span> <span class="m">4</span><span class="p">}</span>
+<span class="n">measure</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="c">// =&gt; Geometry main.rect{width:3, height:4}, area=12.000000, perimeter=14.000000 </span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// NA</span>
+</code></pre></div>
+<p>In go, this is no <code>implements</code> keyword for implement an interface. 
+If type TA defines all methods specified in interface IA, it is said that type TA satifies interface IA. </p>
+<h2 id='error-handling'>error handling</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">func</span> <span class="n">f1</span><span class="p">(</span><span class="n">arg</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="m">42</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="m">1</span><span class="p">,</span> <span class="n">errors</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="s">"can't work with 42"</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">arg</span> <span class="o">+</span> <span class="m">3</span><span class="p">,</span> <span class="no">nil</span>
+<span class="p">}</span>
+
+<span class="c">// custom error, implement Error() method</span>
+<span class="k">func</span> <span class="p">(</span><span class="n">e</span> <span class="o">*</span><span class="n">CustomError</span><span class="p">)</span> <span class="n">Error</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Sprintf</span><span class="p">(</span><span class="s">"%d - %s"</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">arg</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">prob</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="n">f2</span><span class="p">(</span><span class="n">arg</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="m">42</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="m">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">CustomError</span><span class="p">{</span><span class="n">arg</span><span class="p">,</span> <span class="s">"can't work with it"</span><span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">arg</span> <span class="o">+</span> <span class="m">3</span><span class="p">,</span> <span class="no">nil</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="k">try</span> <span class="p">{</span>
+  <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Whoops!</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// custom error</span>
+<span class="kd">class</span> <span class="nx">CustomError</span> <span class="kd">extends</span> <span class="nb">Error</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">foo</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">,</span> <span class="p">...</span><span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Pass remaining arguments (including vendor specific ones) to parent constructor</span>
+    <span class="k">super</span><span class="p">(...</span><span class="nx">params</span><span class="p">)</span>
+
+    <span class="c1">// Maintains proper stack trace for where our error was thrown (only available on V8)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">Error</span><span class="p">.</span><span class="nx">captureStackTrace</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nb">Error</span><span class="p">.</span><span class="nx">captureStackTrace</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">CustomError</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">CustomError</span><span class="dl">'</span>
+    <span class="c1">// Custom debugging information</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="nx">foo</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div><h2 id='modules-packages'>modules / packages</h2>
 <p>testing modules</p>
 <h2 id='io-file-read-write'>IO, file read/write</h2><h2 id='json-deserialize-serialize'>JSON deserialize/serialize</h2><h2 id='http-client-http-server'>Http Client / Http Server</h2><h2 id='dependency-management'>Dependency Management</h2><h2 id='project-structure'>Project Structure</h2><h1 id='3-advanced'>3. Advanced</h1><h2 id='garbage-collection-amp-memory-leaks'>Garbage collection &amp; Memory leaks</h2><h2 id='memory-model'>Memory model</h2><h2 id='concurrency'>Concurrency</h2><h2 id='popular-and-useful-libraries'>Popular and useful libraries</h2><h1 id='4-further'>4. Further</h1><h2 id='language-caveats'>Language Caveats</h2><h2 id='new-features'>New features</h2><h2 id='interact-with-other-languages'>Interact with other languages</h2><h2 id='frontend-webassembly'>Frontend - WebAssembly</h2><h2 id='trend-in-other-areas-other-than-backend'>Trend in other areas other than backend</h2><h1 id='errors'>Errors</h1>
 <aside class="notice">
