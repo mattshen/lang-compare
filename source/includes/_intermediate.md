@@ -144,10 +144,125 @@ console.log(p2); // => { name: 'Bob', age: 29 }
 | keyword         | __new__ | __new__ |
 | support literal | yes     | yes     |
 
+## methods
+```go
+type rect struct {
+    width, height int
+}
+func (r *rect) area() int {
+    return r.width * r.height
+}
+r := &rect{width: 2, height: 4}
+var area int = r.area()
+fmt.Println(area) // => 8
+```
+```javascript
+const r1 = {
+  width: 2,
+  height: 4,
+  area: function() {
+    return this.width * this.height;
+  }
+}
+console.log(r1.area());
+// or 
+class Rect {
+    constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+  area() {
+    return this.width * this.height;
+  }
+}
+console.log(new Rect(2, 4).area())
+```
+
+Javascript's way of attaching function to object/class is quite traditional. 
+
+Golang's way is sort of "de-coupled". 
 
 ## interface
+```go
+type geometry interface {
+	area() float64
+	perim() float64
+}
 
-## classes
+type rect struct {
+	width, height float64
+}
+
+func (r rect) area() float64 {
+	return r.width * r.height
+}
+
+func (r rect) perim() float64 {
+	return 2*r.width + 2*r.height
+}
+
+func measure(g geometry) {
+	fmt.Printf("Geometry %#v, area=%f, perimeter=%f \n", g, g.area(), g.perim())
+}
+
+r := rect{width: 3, height: 4}
+measure(r) // => Geometry main.rect{width:3, height:4}, area=12.000000, perimeter=14.000000 
+```
+```javascript
+// NA
+```
+
+In go, this is no `implements` keyword for implement an interface. 
+If type TA defines all methods specified in interface IA, it is said that type TA satifies interface IA. 
+
+## error handling
+```go
+func f1(arg int) (int, error) {
+	if arg == 42 {
+		return -1, errors.New("can't work with 42")
+	}
+	return arg + 3, nil
+}
+
+// custom error, implement Error() method
+func (e *CustomError) Error() string {
+	return fmt.Sprintf("%d - %s", e.arg, e.prob)
+}
+func f2(arg int) (int, error) {
+	if arg == 42 {
+		return -1, &CustomError{arg, "can't work with it"}
+	}
+	return arg + 3, nil
+}
+```
+
+```javascript
+try {
+  throw new Error('Whoops!')
+} catch (e) {
+  console.error(e.name + ': ' + e.message)
+}
+
+// custom error
+class CustomError extends Error {
+  constructor(foo = 'bar', ...params) {
+    // Pass remaining arguments (including vendor specific ones) to parent constructor
+    super(...params)
+
+    // Maintains proper stack trace for where our error was thrown (only available on V8)
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, CustomError)
+    }
+
+    this.name = 'CustomError'
+    // Custom debugging information
+    this.foo = foo
+    this.date = new Date()
+  }
+}
+
+```
+
 
 ## modules / packages
 testing modules
