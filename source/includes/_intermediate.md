@@ -262,13 +262,36 @@ class CustomError extends Error {
 }
 
 ```
+## Asynchorous Programming
 
-
-## modules / packages
-testing modules
 
 ## IO, file read/write
 ## JSON deserialize/serialize
 ## Http Client / Http Server
+
+## Packages or Modules
+
+In __golang__, a publishable unit is called module, consisting a list of packages. A package can be one file or many files. This is similar to Java. 
+
+In __javascript__, a publishable is called package, consisting a list of modules. A module is one JS file.
+
+### Links
+- https://blog.golang.org/using-go-modules
+
+### Useful commands
+* golang
+  * `go mod init` creates a new module, initializing the go.mod file that describes it.
+  * `go build`, `go test`, and other package-building commands add new dependencies to go.mod as needed.
+  * `go list -m all` prints the current module’s dependencies.
+  * `go get` changes the required version of a dependency (or adds a new dependency).
+  * `go mod tidy` removes unused dependencies.
+* javascript
+  * `npm init`
+  * `npm install`
+  * `npm add package-abc --save`
+  * `npm add package-abc --save-dev`
+  * `npm update [-g] [package-abc]` // update package to lastest
+  * `npm prune --production=false`
+
 ## Dependency Management
 ## Project Structure
