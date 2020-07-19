@@ -279,7 +279,7 @@
                     <a href="#error-handling" class="toc-h2 toc-link" data-title="error handling">error handling</a>
                   </li>
                   <li>
-                    <a href="#modules-packages" class="toc-h2 toc-link" data-title="modules / packages">modules / packages</a>
+                    <a href="#asynchorous-programming" class="toc-h2 toc-link" data-title="Asynchorous Programming">Asynchorous Programming</a>
                   </li>
                   <li>
                     <a href="#io-file-read-write" class="toc-h2 toc-link" data-title="IO, file read/write">IO, file read/write</a>
@@ -289,6 +289,9 @@
                   </li>
                   <li>
                     <a href="#http-client-http-server" class="toc-h2 toc-link" data-title="Http Client / Http Server">Http Client / Http Server</a>
+                  </li>
+                  <li>
+                    <a href="#packages-or-modules" class="toc-h2 toc-link" data-title="Packages or Modules">Packages or Modules</a>
                   </li>
                   <li>
                     <a href="#dependency-management" class="toc-h2 toc-link" data-title="Dependency Management">Dependency Management</a>
@@ -1204,9 +1207,37 @@ If type TA defines all methods specified in interface IA, it is said that type T
   <span class="p">}</span>
 <span class="p">}</span>
 
-</code></pre></div><h2 id='modules-packages'>modules / packages</h2>
-<p>testing modules</p>
-<h2 id='io-file-read-write'>IO, file read/write</h2><h2 id='json-deserialize-serialize'>JSON deserialize/serialize</h2><h2 id='http-client-http-server'>Http Client / Http Server</h2><h2 id='dependency-management'>Dependency Management</h2><h2 id='project-structure'>Project Structure</h2><h1 id='3-advanced'>3. Advanced</h1><h2 id='garbage-collection-amp-memory-leaks'>Garbage collection &amp; Memory leaks</h2><h2 id='memory-model'>Memory model</h2><h2 id='concurrency'>Concurrency</h2><h2 id='popular-and-useful-libraries'>Popular and useful libraries</h2><h1 id='4-further'>4. Further</h1><h2 id='language-caveats'>Language Caveats</h2><h2 id='new-features'>New features</h2><h2 id='interact-with-other-languages'>Interact with other languages</h2><h2 id='frontend-webassembly'>Frontend - WebAssembly</h2><h2 id='trend-in-other-areas-other-than-backend'>Trend in other areas other than backend</h2><h1 id='errors'>Errors</h1>
+</code></pre></div><h2 id='asynchorous-programming'>Asynchorous Programming</h2><h2 id='io-file-read-write'>IO, file read/write</h2><h2 id='json-deserialize-serialize'>JSON deserialize/serialize</h2><h2 id='http-client-http-server'>Http Client / Http Server</h2><h2 id='packages-or-modules'>Packages or Modules</h2>
+<p>In <strong>golang</strong>, a publishable unit is called module, consisting a list of packages. A package can be one file or many files. This is similar to Java. </p>
+
+<p>In <strong>javascript</strong>, a publishable is called package, consisting a list of modules. A module is one JS file.</p>
+<h3 id='links'>Links</h3>
+<ul>
+<li>https://blog.golang.org/using-go-modules</li>
+</ul>
+<h3 id='useful-commands'>Useful commands</h3>
+<ul>
+<li>golang
+
+<ul>
+<li><code>go mod init</code> creates a new module, initializing the go.mod file that describes it.</li>
+<li><code>go build</code>, <code>go test</code>, and other package-building commands add new dependencies to go.mod as needed.</li>
+<li><code>go list -m all</code> prints the current module’s dependencies.</li>
+<li><code>go get</code> changes the required version of a dependency (or adds a new dependency).</li>
+<li><code>go mod tidy</code> removes unused dependencies.</li>
+</ul></li>
+<li>javascript
+
+<ul>
+<li><code>npm init</code></li>
+<li><code>npm install</code></li>
+<li><code>npm add package-abc --save</code></li>
+<li><code>npm add package-abc --save-dev</code></li>
+<li><code>npm update [-g] [package-abc]</code> // update package to lastest</li>
+<li><code>npm prune --production=false</code></li>
+</ul></li>
+</ul>
+<h2 id='dependency-management'>Dependency Management</h2><h2 id='project-structure'>Project Structure</h2><h1 id='3-advanced'>3. Advanced</h1><h2 id='garbage-collection-amp-memory-leaks'>Garbage collection &amp; Memory leaks</h2><h2 id='memory-model'>Memory model</h2><h2 id='concurrency'>Concurrency</h2><h2 id='popular-and-useful-libraries'>Popular and useful libraries</h2><h1 id='4-further'>4. Further</h1><h2 id='language-caveats'>Language Caveats</h2><h2 id='new-features'>New features</h2><h2 id='interact-with-other-languages'>Interact with other languages</h2><h2 id='frontend-webassembly'>Frontend - WebAssembly</h2><h2 id='trend-in-other-areas-other-than-backend'>Trend in other areas other than backend</h2><h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
