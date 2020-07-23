@@ -279,7 +279,7 @@
                     <a href="#error-handling" class="toc-h2 toc-link" data-title="error handling">error handling</a>
                   </li>
                   <li>
-                    <a href="#asynchorous-programming" class="toc-h2 toc-link" data-title="Asynchorous Programming">Asynchorous Programming</a>
+                    <a href="#basic-asynchronous" class="toc-h2 toc-link" data-title="Basic Asynchronous">Basic Asynchronous</a>
                   </li>
                   <li>
                     <a href="#io-file-read-write" class="toc-h2 toc-link" data-title="IO, file read/write">IO, file read/write</a>
@@ -1207,7 +1207,76 @@ If type TA defines all methods specified in interface IA, it is said that type T
   <span class="p">}</span>
 <span class="p">}</span>
 
-</code></pre></div><h2 id='asynchorous-programming'>Asynchorous Programming</h2><h2 id='io-file-read-write'>IO, file read/write</h2><h2 id='json-deserialize-serialize'>JSON deserialize/serialize</h2><h2 id='http-client-http-server'>Http Client / Http Server</h2><h2 id='packages-or-modules'>Packages or Modules</h2>
+</code></pre></div><h2 id='basic-asynchronous'>Basic Asynchronous</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// defining two expensive computations</span>
+<span class="k">func</span> <span class="n">compute1</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+  <span class="c">// expensive computing</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">Second</span><span class="p">)</span>
+  <span class="k">return</span> <span class="s">"3.14"</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="n">compute2</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+  <span class="c">// expensive computing</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">Second</span> <span class="o">*</span> <span class="m">2</span><span class="p">)</span>
+  <span class="k">return</span> <span class="s">"42"</span>
+<span class="p">}</span>
+
+<span class="c">//fire and forget, non-blocking</span>
+<span class="k">go</span> <span class="k">func</span><span class="p">(){</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">compute1</span><span class="p">();</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="p">}()</span>
+
+<span class="c">// wait for one result</span>
+<span class="n">r</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">chan</span> <span class="kt">string</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+<span class="k">go</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span> <span class="n">r</span> <span class="o">&lt;-</span> <span class="n">compute1</span><span class="p">()</span> <span class="p">}()</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="o">&lt;-</span><span class="n">r</span><span class="p">)</span> <span class="c">// =&gt; '3.14'</span>
+
+<span class="c">// wait for two results</span>
+<span class="n">r1</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">chan</span> <span class="kt">string</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">r2</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">chan</span> <span class="kt">string</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+<span class="k">go</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span> <span class="n">r1</span> <span class="o">&lt;-</span> <span class="n">compute1</span><span class="p">()</span> <span class="p">}()</span>
+<span class="k">go</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span> <span class="n">r2</span> <span class="o">&lt;-</span> <span class="n">compute2</span><span class="p">()</span> <span class="p">}()</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="o">&lt;-</span><span class="n">r1</span><span class="p">)</span> <span class="c">// =&gt; 3.14</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="o">&lt;-</span><span class="n">r2</span><span class="p">)</span> <span class="c">// =&gt; 42</span>
+
+<span class="c">// wait for first resolved</span>
+<span class="n">c1</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">chan</span> <span class="kt">string</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">chan</span> <span class="kt">string</span><span class="p">)</span>
+<span class="k">go</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span> <span class="n">c1</span> <span class="o">&lt;-</span> <span class="n">compute1</span><span class="p">()</span> <span class="p">}()</span>
+<span class="k">go</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span> <span class="n">c2</span> <span class="o">&lt;-</span> <span class="n">compute2</span><span class="p">()</span> <span class="p">}()</span>
+<span class="k">select</span> <span class="p">{</span>
+<span class="k">case</span> <span class="n">msg1</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="n">c1</span><span class="o">:</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"received"</span><span class="p">,</span> <span class="n">msg1</span><span class="p">)</span> 
+<span class="k">case</span> <span class="n">msg2</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="n">c2</span><span class="o">:</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"received"</span><span class="p">,</span> <span class="n">msg2</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c">// =&gt; "received 3.14"</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">fetchRemote1</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">resolve</span><span class="p">(</span><span class="dl">'</span><span class="s1">3.14...</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">fetchRemote2</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">resolve</span><span class="p">(</span><span class="dl">'</span><span class="s1">42</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+<span class="c1">// fire and forget, non-blocking</span>
+<span class="nx">fetchRemote1</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">err</span><span class="p">)</span>
+
+<span class="c1">// wait for one result</span>
+<span class="kd">const</span> <span class="nx">pi</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetchRemote1</span><span class="p">();</span> <span class="c1">// =&gt; '42'</span>
+
+<span class="c1">// wait for multiple results</span>
+<span class="kd">const</span> <span class="p">[</span><span class="nx">pi</span><span class="p">,</span> <span class="nx">life</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span><span class="nx">fetchRemote1</span><span class="p">(),</span> <span class="nx">fetchRemote2</span><span class="p">()])</span> <span class="c1">// =&gt; ['3.14...', '42']</span>
+
+<span class="c1">// wait for first resolved</span>
+<span class="kd">const</span> <span class="nx">winner</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">race</span><span class="p">([</span><span class="nx">fetchRemote1</span><span class="p">(),</span> <span class="nx">fetchRemote2</span><span class="p">()])</span> <span class="c1">// =&gt; '3.14...'</span>
+</code></pre></div>
+<p>Golang goroutines are very lightweight, as well as JS Promises.</p>
+
+<p>Golang is a bit verbose as compared to JS. </p>
+<h2 id='io-file-read-write'>IO, file read/write</h2><h2 id='json-deserialize-serialize'>JSON deserialize/serialize</h2><h2 id='http-client-http-server'>Http Client / Http Server</h2><h2 id='packages-or-modules'>Packages or Modules</h2>
 <p>In <strong>golang</strong>, a publishable unit is called module, consisting a list of packages. A package can be one file or many files. This is similar to Java. </p>
 
 <p>In <strong>javascript</strong>, a publishable is called package, consisting a list of modules. A module is one JS file.</p>
