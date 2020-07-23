@@ -262,7 +262,81 @@ class CustomError extends Error {
 }
 
 ```
-## Asynchorous Programming
+## Basic Asynchronous
+```go
+// defining two expensive computations
+func compute1() string {
+  // expensive computing
+  time.Sleep(time.Second)
+  return "3.14"
+}
+func compute2() string {
+  // expensive computing
+  time.Sleep(time.Second * 2)
+  return "42"
+}
+
+//fire and forget, non-blocking
+go func(){ r := compute1(); fmt.Println(r) }()
+
+// wait for one result
+r := make(chan string, 1)
+go func() { r <- compute1() }()
+fmt.Println(<-r) // => '3.14'
+
+// wait for two results
+r1 := make(chan string, 1)
+r2 := make(chan string, 1)
+go func() { r1 <- compute1() }()
+go func() { r2 <- compute2() }()
+fmt.Println(<-r1) // => 3.14
+fmt.Println(<-r2) // => 42
+
+// wait for first resolved
+c1 := make(chan string)
+c2 := make(chan string)
+go func() { c1 <- compute1() }()
+go func() { c2 <- compute2() }()
+select {
+case msg1 := <-c1:
+    fmt.Println("received", msg1) 
+case msg2 := <-c2:
+    fmt.Println("received", msg2)
+}
+// => "received 3.14"
+```
+
+```javascript
+async function fetchRemote1() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('3.14...');
+    }, 1000);
+  });
+}
+async function fetchRemote2() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('42');
+    }, 2000);
+  });
+}
+// fire and forget, non-blocking
+fetchRemote1().then(console.log).catch(console.err)
+
+// wait for one result
+const pi = await fetchRemote1(); // => '42'
+
+// wait for multiple results
+const [pi, life] = await Promise.all([fetchRemote1(), fetchRemote2()]) // => ['3.14...', '42']
+
+// wait for first resolved
+const winner = await Promise.race([fetchRemote1(), fetchRemote2()]) // => '3.14...'
+```
+
+Golang goroutines are very lightweight, as well as JS Promises.
+
+Golang is a bit verbose as compared to JS. 
 
 
 ## IO, file read/write
