@@ -285,10 +285,10 @@
                     <a href="#io-file-read-write" class="toc-h2 toc-link" data-title="IO, file read/write">IO, file read/write</a>
                   </li>
                   <li>
-                    <a href="#json-deserialize-serialize" class="toc-h2 toc-link" data-title="JSON deserialize/serialize">JSON deserialize/serialize</a>
+                    <a href="#http-client-http-server" class="toc-h2 toc-link" data-title="Http Client / Http Server">Http Client / Http Server</a>
                   </li>
                   <li>
-                    <a href="#http-client-http-server" class="toc-h2 toc-link" data-title="Http Client / Http Server">Http Client / Http Server</a>
+                    <a href="#json-deserialize-serialize" class="toc-h2 toc-link" data-title="JSON deserialize/serialize">JSON deserialize/serialize</a>
                   </li>
                   <li>
                     <a href="#packages-or-modules" class="toc-h2 toc-link" data-title="Packages or Modules">Packages or Modules</a>
@@ -1276,7 +1276,90 @@ If type TA defines all methods specified in interface IA, it is said that type T
 <p>Golang goroutines are very lightweight, as well as JS Promises.</p>
 
 <p>Golang is a bit verbose as compared to JS. </p>
-<h2 id='io-file-read-write'>IO, file read/write</h2><h2 id='json-deserialize-serialize'>JSON deserialize/serialize</h2><h2 id='http-client-http-server'>Http Client / Http Server</h2><h2 id='packages-or-modules'>Packages or Modules</h2>
+<h2 id='io-file-read-write'>IO, file read/write</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// dealing with small files</span>
+<span class="k">func</span> <span class="n">rw_small_file</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c">// read the whole file at once</span>
+    <span class="n">b</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadFile</span><span class="p">(</span><span class="s">"input.txt"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c">// write the whole body at once</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">WriteFile</span><span class="p">(</span><span class="s">"output.txt"</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="m">0644</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c">// dealing with big file</span>
+<span class="k">func</span> <span class="n">rw_big_file</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c">// open input file</span>
+    <span class="n">fi</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">os</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s">"input.txt"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="c">// close fi on exit and check for its returned error</span>
+    <span class="k">defer</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">fi</span><span class="o">.</span><span class="n">Close</span><span class="p">();</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+            <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}()</span>
+
+    <span class="c">// open output file</span>
+    <span class="n">fo</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">os</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="s">"output.txt"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="c">// close fo on exit and check for its returned error</span>
+    <span class="k">defer</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">fo</span><span class="o">.</span><span class="n">Close</span><span class="p">();</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+            <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}()</span>
+
+    <span class="c">// make a buffer to keep chunks that are read</span>
+    <span class="n">buf</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="m">1024</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">{</span>
+        <span class="c">// read a chunk</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">fi</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="o">&amp;&amp;</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">io</span><span class="o">.</span><span class="n">EOF</span> <span class="p">{</span>
+            <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="m">0</span> <span class="p">{</span>
+            <span class="k">break</span>
+        <span class="p">}</span>
+
+        <span class="c">// write a chunk</span>
+        <span class="k">if</span> <span class="n">_</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">fo</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="o">:</span><span class="n">n</span><span class="p">]);</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+            <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// read the entire file</span>
+<span class="kd">const</span> <span class="nx">contents</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">).</span><span class="nx">readFileSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">filename</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf8</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">contents</span><span class="p">);</span>
+
+<span class="c1">// write to file</span>
+<span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">).</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="dl">"</span><span class="s2">./tmp.txt</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Hey there!</span><span class="dl">"</span><span class="p">);</span> 
+
+<span class="c1">// read big file</span>
+<span class="kd">const</span> <span class="nx">stream</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">fs</span><span class="dl">"</span><span class="p">).</span><span class="nx">createReadStream</span><span class="p">(</span><span class="dl">"</span><span class="s2">./bigfile.txt</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">stream</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">chunk</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">chunk</span><span class="p">);</span>
+<span class="p">});</span> 
+
+<span class="c1">// write to big file</span>
+<span class="kd">const</span> <span class="nx">stream</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">fs</span><span class="dl">"</span><span class="p">).</span><span class="nx">createWriteStream</span><span class="p">(</span><span class="dl">"</span><span class="s2">tmp.txt</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">flags</span><span class="p">:</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span> <span class="p">});</span>
+<span class="nx">stream</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="dl">"</span><span class="s2">Tutorial on Node.js</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">stream</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="dl">"</span><span class="s2">Introduction</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>
+<p>Golang has very traditional style of dealing with files, which resulting clear but verbose coding. </p>
+
+<p>Javascript(Nodejs)&#39;s API is much more concise. Also NodeJS provides both sync and async
+style APIs. </p>
+<h2 id='http-client-http-server'>Http Client / Http Server</h2><h2 id='json-deserialize-serialize'>JSON deserialize/serialize</h2><h2 id='packages-or-modules'>Packages or Modules</h2>
 <p>In <strong>golang</strong>, a publishable unit is called module, consisting a list of packages. A package can be one file or many files. This is similar to Java. </p>
 
 <p>In <strong>javascript</strong>, a publishable is called package, consisting a list of modules. A module is one JS file.</p>
