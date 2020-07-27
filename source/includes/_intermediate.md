@@ -338,10 +338,100 @@ Golang goroutines are very lightweight, as well as JS Promises.
 
 Golang is a bit verbose as compared to JS. 
 
-
 ## IO, file read/write
-## JSON deserialize/serialize
+```go
+// dealing with small files
+func rw_small_file() {
+	// read the whole file at once
+	b, err := ioutil.ReadFile("input.txt")
+	if err != nil {
+		panic(err)
+	}
+
+	// write the whole body at once
+	err = ioutil.WriteFile("output.txt", b, 0644)
+	if err != nil {
+		panic(err)
+	}
+}
+
+// dealing with big file
+func rw_big_file() {
+	// open input file
+	fi, err := os.Open("input.txt")
+	if err != nil {
+		panic(err)
+	}
+	// close fi on exit and check for its returned error
+	defer func() {
+		if err := fi.Close(); err != nil {
+			panic(err)
+		}
+	}()
+
+	// open output file
+	fo, err := os.Create("output.txt")
+	if err != nil {
+		panic(err)
+	}
+	// close fo on exit and check for its returned error
+	defer func() {
+		if err := fo.Close(); err != nil {
+			panic(err)
+		}
+	}()
+
+	// make a buffer to keep chunks that are read
+	buf := make([]byte, 1024)
+	for {
+		// read a chunk
+		n, err := fi.Read(buf)
+		if err != nil && err != io.EOF {
+			panic(err)
+		}
+		if n == 0 {
+			break
+		}
+
+		// write a chunk
+		if _, err := fo.Write(buf[:n]); err != nil {
+			panic(err)
+		}
+	}
+}
+
+```
+
+```javascript
+// read the entire file
+const contents = require('fs').readFileSync('filename', 'utf8');
+console.log(contents);
+
+// write to file
+require('fs').writeFileSync("./tmp.txt", "Hey there!"); 
+
+// read big file
+const stream = require("fs").createReadStream("./bigfile.txt");
+stream.on("data", function(data) {
+    var chunk = data.toString();
+    console.log(chunk);
+}); 
+
+// write to big file
+const stream = require("fs").createWriteStream("tmp.txt", { flags:'a' });
+stream.write("Tutorial on Node.js")
+stream.write("Introduction")
+```
+
+Golang has very traditional style of dealing with files, which resulting clear but verbose coding. 
+
+Javascript(Nodejs)'s API is much more concise. Also NodeJS provides both sync and async
+style APIs. 
+
+
 ## Http Client / Http Server
+
+## JSON deserialize/serialize
 
 ## Packages or Modules
 
