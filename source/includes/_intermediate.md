@@ -428,10 +428,73 @@ Golang has very traditional style of dealing with files, which resulting clear b
 Javascript(Nodejs)'s API is much more concise. Also NodeJS provides both sync and async
 style APIs. 
 
+## Http Server
+```golang
+import (
+	"fmt"
+	"net/http"
+)
 
-## Http Client / Http Server
+func hello(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintf(w, "hello\n")
+}
+
+func main() {
+	http.HandleFunc("/hello", hello)
+	http.ListenAndServe(":8090", nil)
+}
+```
+
+```javascript
+const http = require('http')
+
+const hello = (request, response) => {
+  console.log(request.url);
+  response.end('hello\n');
+}
+
+const server = http.createServer(hello);
+
+server.listen(8090, (err) => {
+  if (err) {
+    return console.error('something bad happened', err)
+  }
+});
+```
+
+Both golang and Nodejs provide easy-to-use API to create a basic http server. 
+
+## Http Client 
+```golang
+
+```
+
+```javascript
+// using axios
+const axios = require('axios');
+try {
+  const res = await axios({
+    method: 'POST',
+    url: 'https://localhost:3000',
+    headers: {
+      client_id: 'client123',
+      Authorization: 'Bearer token123'
+    },
+    data: {
+      field1: 123,
+      field2: 'abc'
+    }
+  });
+  console.log(res.data); // 2xx
+} catch (err) {
+  console.error(err); // non-2xx
+}
+```
 
 ## JSON deserialize/serialize
+
+## Dealing with RDBMS (SQL Lite)
+
 
 ## Packages or Modules
 
