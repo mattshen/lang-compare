@@ -261,22 +261,22 @@
             <a href="#2-intermediate" class="toc-h1 toc-link" data-title="2. Intermediate">2. Intermediate</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#pointers-references-pass-by" class="toc-h2 toc-link" data-title="pointers / references / pass-by-???">pointers / references / pass-by-???</a>
+                    <a href="#pointers-references-pass-by-x" class="toc-h2 toc-link" data-title="Pointers / References / Pass-by-X">Pointers / References / Pass-by-X</a>
                   </li>
                   <li>
-                    <a href="#class-struct" class="toc-h2 toc-link" data-title="class/struct">class/struct</a>
+                    <a href="#class-struct" class="toc-h2 toc-link" data-title="Class / Struct">Class / Struct</a>
                   </li>
                   <li>
-                    <a href="#object" class="toc-h2 toc-link" data-title="object">object</a>
+                    <a href="#objects" class="toc-h2 toc-link" data-title="Objects">Objects</a>
                   </li>
                   <li>
-                    <a href="#methods" class="toc-h2 toc-link" data-title="methods">methods</a>
+                    <a href="#methods" class="toc-h2 toc-link" data-title="Methods">Methods</a>
                   </li>
                   <li>
-                    <a href="#interface" class="toc-h2 toc-link" data-title="interface">interface</a>
+                    <a href="#interface" class="toc-h2 toc-link" data-title="Interface">Interface</a>
                   </li>
                   <li>
-                    <a href="#error-handling" class="toc-h2 toc-link" data-title="error handling">error handling</a>
+                    <a href="#error-handling" class="toc-h2 toc-link" data-title="Error handling">Error handling</a>
                   </li>
                   <li>
                     <a href="#basic-asynchronous" class="toc-h2 toc-link" data-title="Basic Asynchronous">Basic Asynchronous</a>
@@ -292,6 +292,9 @@
                   </li>
                   <li>
                     <a href="#json-deserialize-serialize" class="toc-h2 toc-link" data-title="JSON deserialize/serialize">JSON deserialize/serialize</a>
+                  </li>
+                  <li>
+                    <a href="#datetime" class="toc-h2 toc-link" data-title="DateTime">DateTime</a>
                   </li>
                   <li>
                     <a href="#dealing-with-rdbms-sql-lite" class="toc-h2 toc-link" data-title="Dealing with RDBMS (SQL Lite)">Dealing with RDBMS (SQL Lite)</a>
@@ -969,7 +972,7 @@ world`</span><span class="p">;</span>
 <td><code>while</code></td>
 </tr>
 </tbody></table>
-<h1 id='2-intermediate'>2. Intermediate</h1><h2 id='pointers-references-pass-by'>pointers / references / pass-by-???</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">func</span> <span class="n">zeroval</span><span class="p">(</span><span class="n">ival</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+<h1 id='2-intermediate'>2. Intermediate</h1><h2 id='pointers-references-pass-by-x'>Pointers / References / Pass-by-X</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">func</span> <span class="n">zeroval</span><span class="p">(</span><span class="n">ival</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">ival</span> <span class="o">=</span> <span class="m">0</span>
 <span class="p">}</span>
 
@@ -1014,7 +1017,7 @@ For a reference value, dereference (<code>*</code>) is required to access the va
 <p>For <strong>javascript</strong>, it&#39;s the same. However there are two differences as compared to golang:
 - programmer doesn&#39;t have control to passing a normal value or a reference value.
 - dereference happens implicitly (with <code>.</code>). </p>
-<h2 id='class-struct'>class/struct</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// define struct</span>
+<h2 id='class-struct'>Class / Struct</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="c">// define struct</span>
 <span class="k">type</span> <span class="n">person</span> <span class="k">struct</span> <span class="p">{</span>
   <span class="n">name</span> <span class="kt">string</span>
   <span class="n">age</span>  <span class="kt">int</span>
@@ -1069,7 +1072,7 @@ For a reference value, dereference (<code>*</code>) is required to access the va
 <td><strong>class</strong></td>
 </tr>
 </tbody></table>
-<h2 id='object'>object</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">type</span> <span class="n">person</span> <span class="k">struct</span> <span class="p">{</span>
+<h2 id='objects'>Objects</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">type</span> <span class="n">person</span> <span class="k">struct</span> <span class="p">{</span>
   <span class="n">name</span> <span class="kt">string</span>
   <span class="n">age</span>  <span class="kt">int</span>
 <span class="p">}</span>
@@ -1113,7 +1116,7 @@ For a reference value, dereference (<code>*</code>) is required to access the va
 <td>yes</td>
 </tr>
 </tbody></table>
-<h2 id='methods'>methods</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">type</span> <span class="n">rect</span> <span class="k">struct</span> <span class="p">{</span>
+<h2 id='methods'>Methods</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">type</span> <span class="n">rect</span> <span class="k">struct</span> <span class="p">{</span>
     <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="kt">int</span>
 <span class="p">}</span>
 <span class="k">func</span> <span class="p">(</span><span class="n">r</span> <span class="o">*</span><span class="n">rect</span><span class="p">)</span> <span class="n">area</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>
@@ -1145,7 +1148,7 @@ For a reference value, dereference (<code>*</code>) is required to access the va
 <p>Javascript&#39;s way of attaching function to object/class is quite traditional. </p>
 
 <p>Golang&#39;s way is sort of &quot;de-coupled&quot;. </p>
-<h2 id='interface'>interface</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">type</span> <span class="n">geometry</span> <span class="k">interface</span> <span class="p">{</span>
+<h2 id='interface'>Interface</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">type</span> <span class="n">geometry</span> <span class="k">interface</span> <span class="p">{</span>
     <span class="n">area</span><span class="p">()</span> <span class="kt">float64</span>
     <span class="n">perim</span><span class="p">()</span> <span class="kt">float64</span>
 <span class="p">}</span>
@@ -1172,7 +1175,7 @@ For a reference value, dereference (<code>*</code>) is required to access the va
 </code></pre></div>
 <p>In go, this is no <code>implements</code> keyword for implement an interface. 
 If type TA defines all methods specified in interface IA, it is said that type TA satifies interface IA. </p>
-<h2 id='error-handling'>error handling</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">func</span> <span class="n">f1</span><span class="p">(</span><span class="n">arg</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+<h2 id='error-handling'>Error handling</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">func</span> <span class="n">f1</span><span class="p">(</span><span class="n">arg</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="m">42</span> <span class="p">{</span>
         <span class="k">return</span> <span class="o">-</span><span class="m">1</span><span class="p">,</span> <span class="n">errors</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="s">"can't work with 42"</span><span class="p">)</span>
     <span class="p">}</span>
@@ -1365,7 +1368,7 @@ If type TA defines all methods specified in interface IA, it is said that type T
 
 <p>Javascript(Nodejs)&#39;s API is much more concise. Also NodeJS provides both sync and async
 style APIs. </p>
-<h2 id='http-server'>Http Server</h2><div class="highlight"><pre class="highlight go"><code><span class="k">import</span> <span class="p">(</span>
+<h2 id='http-server'>Http Server</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">import</span> <span class="p">(</span>
     <span class="s">"fmt"</span>
     <span class="s">"net/http"</span>
 <span class="p">)</span>
@@ -1394,7 +1397,31 @@ style APIs. </p>
 <span class="p">});</span>
 </code></pre></div>
 <p>Both golang and Nodejs provide easy-to-use API to create a basic http server. </p>
-<h2 id='http-client'>Http Client</h2><div class="highlight"><pre class="highlight go"><code>
+<h2 id='http-client'>Http Client</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">import</span> <span class="p">(</span>
+    <span class="s">"bufio"</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"net/http"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s">"http://localhost:8090/hello"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">defer</span> <span class="n">resp</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Response status:"</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">Status</span><span class="p">)</span>
+
+    <span class="n">scanner</span> <span class="o">:=</span> <span class="n">bufio</span><span class="o">.</span><span class="n">NewScanner</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">scanner</span><span class="o">.</span><span class="n">Scan</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="m">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">scanner</span><span class="o">.</span><span class="n">Text</span><span class="p">())</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">scanner</span><span class="o">.</span><span class="n">Err</span><span class="p">();</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// using axios</span>
 <span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
 <span class="k">try</span> <span class="p">{</span>
@@ -1414,7 +1441,43 @@ style APIs. </p>
 <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="c1">// non-2xx</span>
 <span class="p">}</span>
-</code></pre></div><h2 id='json-deserialize-serialize'>JSON deserialize/serialize</h2><h2 id='dealing-with-rdbms-sql-lite'>Dealing with RDBMS (SQL Lite)</h2><h2 id='packages-or-modules'>Packages or Modules</h2>
+</code></pre></div>
+<p>Consider timeout cases in case of prolonged server response. </p>
+<h2 id='json-deserialize-serialize'>JSON deserialize/serialize</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">import</span> <span class="p">(</span><span class="s">"encoding/json"</span> <span class="s">"fmt"</span>   <span class="s">"log"</span> <span class="s">"time"</span><span class="p">)</span>
+<span class="c">// deserialize</span>
+
+<span class="k">type</span> <span class="n">FruitBasket</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">Name</span>    <span class="kt">string</span>
+    <span class="n">Fruit</span>   <span class="p">[]</span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">deserialize</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">jsonData</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">(</span><span class="s">`{
+        "Name":"Standard",
+        "Fruit":["Apple","Banana","Orange"]
+    }`</span><span class="p">)</span>
+    <span class="k">var</span> <span class="n">basket</span> <span class="n">FruitBasket</span>
+    <span class="n">err</span> <span class="o">:=</span> <span class="n">json</span><span class="o">.</span><span class="n">Unmarshal</span><span class="p">(</span><span class="n">jsonData</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">basket</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"%+v</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">basket</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">serialize</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">jsonData</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">json</span><span class="o">.</span><span class="n">Marshal</span><span class="p">(</span><span class="n">FruitBasket</span><span class="p">{</span>
+        <span class="n">Name</span><span class="o">:</span>    <span class="s">"Standard"</span><span class="p">,</span>
+        <span class="n">Fruit</span><span class="o">:</span>   <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"Apple"</span><span class="p">,</span> <span class="s">"Banana"</span><span class="p">,</span> <span class="s">"Orange"</span><span class="p">}</span>
+    <span class="p">})</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">jsonData</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// deserialize</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="dl">'</span><span class="s1">{"key1": 123, "key2": "abc"}</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// =&gt; { key1: 123, key2: 'abc' }</span>
+
+<span class="c1">// serialize</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">key1</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="na">key2</span><span class="p">:</span> <span class="dl">'</span><span class="s1">abc</span><span class="dl">'</span> <span class="p">})</span> <span class="c1">// =&gt; '{"key1":123,"key2":"abc"}'</span>
+</code></pre></div>
+<p>Javascript, is almost the easiest language in dealing with JSON.</p>
+
+<p>Golang Like other static typed language, requires defined types to match JSON message.</p>
+<h2 id='datetime'>DateTime</h2><h2 id='dealing-with-rdbms-sql-lite'>Dealing with RDBMS (SQL Lite)</h2><h2 id='packages-or-modules'>Packages or Modules</h2>
 <p>In <strong>golang</strong>, a publishable unit is called module, consisting a list of packages. A package can be one file or many files. This is similar to Java. </p>
 
 <p>In <strong>javascript</strong>, a publishable is called package, consisting a list of modules. A module is one JS file.</p>
