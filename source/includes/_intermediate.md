@@ -1,6 +1,6 @@
 # 2. Intermediate
 
-## pointers / references / pass-by-???
+## Pointers / References / Pass-by-X
 
 ```go
 func zeroval(ival int) {
@@ -54,7 +54,7 @@ For __javascript__, it's the same. However there are two differences as compared
 - dereference happens implicitly (with `.`). 
 
 
-## class/struct
+## Class / Struct
 
 ```go
 // define struct
@@ -107,7 +107,7 @@ console.log(p2); // => PersonES6 { name: 'Bob', age: 39 }
 | keyword        | __struct__, __type__ | __class__ |
 
 
-## object
+## Objects
 ```go
 type person struct {
   name string
@@ -144,7 +144,7 @@ console.log(p2); // => { name: 'Bob', age: 29 }
 | keyword         | __new__ | __new__ |
 | support literal | yes     | yes     |
 
-## methods
+## Methods
 ```go
 type rect struct {
     width, height int
@@ -182,7 +182,7 @@ Javascript's way of attaching function to object/class is quite traditional.
 
 Golang's way is sort of "de-coupled". 
 
-## interface
+## Interface
 ```go
 type geometry interface {
 	area() float64
@@ -215,7 +215,7 @@ measure(r) // => Geometry main.rect{width:3, height:4}, area=12.000000, perimete
 In go, this is no `implements` keyword for implement an interface. 
 If type TA defines all methods specified in interface IA, it is said that type TA satifies interface IA. 
 
-## error handling
+## Error handling
 ```go
 func f1(arg int) (int, error) {
 	if arg == 42 {
@@ -429,7 +429,7 @@ Javascript(Nodejs)'s API is much more concise. Also NodeJS provides both sync an
 style APIs. 
 
 ## Http Server
-```golang
+```go
 import (
 	"fmt"
 	"net/http"
@@ -465,8 +465,32 @@ server.listen(8090, (err) => {
 Both golang and Nodejs provide easy-to-use API to create a basic http server. 
 
 ## Http Client 
-```golang
+```go
+import (
+	"bufio"
+	"fmt"
+	"net/http"
+)
 
+func main() {
+
+	resp, err := http.Get("http://localhost:8090/hello")
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	fmt.Println("Response status:", resp.Status)
+
+	scanner := bufio.NewScanner(resp.Body)
+	for i := 0; scanner.Scan() && i < 5; i++ {
+		fmt.Println(scanner.Text())
+	}
+
+	if err := scanner.Err(); err != nil {
+		panic(err)
+	}
+}
 ```
 
 ```javascript
@@ -491,7 +515,50 @@ try {
 }
 ```
 
+Consider timeout cases in case of prolonged server response. 
+
 ## JSON deserialize/serialize
+```go
+import ("encoding/json" "fmt"	"log" "time")
+// deserialize
+
+type FruitBasket struct {
+	Name    string
+	Fruit   []string
+}
+
+func deserialize() {
+	jsonData := []byte(`{
+		"Name":"Standard",
+		"Fruit":["Apple","Banana","Orange"]
+	}`)
+	var basket FruitBasket
+	err := json.Unmarshal(jsonData, &basket)
+	fmt.Printf("%+v\n", basket)
+}
+
+func serialize() {
+	jsonData, err := json.Marshal(FruitBasket{
+		Name:    "Standard",
+		Fruit:   []string{"Apple", "Banana", "Orange"}
+	})
+	fmt.Println(string(jsonData))
+}
+```
+
+```javascript
+// deserialize
+JSON.parse('{"key1": 123, "key2": "abc"}') // => { key1: 123, key2: 'abc' }
+
+// serialize
+JSON.stringify({ key1: 123, key2: 'abc' }) // => '{"key1":123,"key2":"abc"}'
+```
+
+Javascript, is almost the easiest language in dealing with JSON.
+
+Golang Like other static typed language, requires defined types to match JSON message.
+
+## DateTime
 
 ## Dealing with RDBMS (SQL Lite)
 
