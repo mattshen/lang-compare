@@ -1477,7 +1477,35 @@ style APIs. </p>
 <p>Javascript, is almost the easiest language in dealing with JSON.</p>
 
 <p>Golang Like other static typed language, requires defined types to match JSON message.</p>
-<h2 id='datetime'>DateTime</h2><h2 id='dealing-with-rdbms-sql-lite'>Dealing with RDBMS (SQL Lite)</h2><h2 id='packages-or-modules'>Packages or Modules</h2>
+<h2 id='datetime'>DateTime</h2><div class="highlight"><pre class="highlight go tab-go"><code></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// get timestamp</span>
+<span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="c1">// current timestamp: 1596147462418</span>
+
+<span class="c1">// create date time object from timestamp</span>
+<span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">1596147462418</span><span class="p">)</span> <span class="c1">// =&gt; 2020-07-30T22:17:42.418Z</span>
+
+<span class="c1">// read/write ISO format without timezone information</span>
+<span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="dl">'</span><span class="s1">2012-07-29T11:05:45</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// =&gt; 2012-07-29T01:05:45.000Z, printed UTC value, local timezone is used during parsing</span>
+
+<span class="c1">// read/write ISO format with timezone information</span>
+<span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="dl">'</span><span class="s1">2012-03-29T10:05:45+10:00</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// =&gt; 2012-03-29T00:05:45.000Z, printed UTC value</span>
+<span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="dl">'</span><span class="s1">2012-03-29T10:05:45+08:00</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// =&gt; 2012-03-29T02:05:45.000Z</span>
+
+<span class="c1">// print local DateTime String, with specified timezone</span>
+<span class="kd">const</span> <span class="nx">moment</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">moment-timezone</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">moment</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="dl">'</span><span class="s1">2012-03-29T10:05:45+08:00</span><span class="dl">'</span><span class="p">)).</span><span class="nx">format</span><span class="p">();</span> <span class="c1">// =&gt; '2012-03-29T13:05:45+11:00'</span>
+<span class="nx">moment</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="dl">'</span><span class="s1">2012-03-29T10:05:45+08:00</span><span class="dl">'</span><span class="p">)).</span><span class="nx">tz</span><span class="p">(</span><span class="dl">'</span><span class="s1">UTC</span><span class="dl">'</span><span class="p">).</span><span class="nx">format</span><span class="p">();</span> <span class="c1">// =&gt; '2012-03-29T02:05:45Z'</span>
+
+<span class="nx">moment</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="dl">'</span><span class="s1">2012-03-29T10:05:45+08:00</span><span class="dl">'</span><span class="p">)).</span><span class="nx">tz</span><span class="p">(</span><span class="dl">'</span><span class="s1">Australia/Perth</span><span class="dl">'</span><span class="p">).</span><span class="nx">format</span><span class="p">();</span> <span class="c1">// =&gt; '2012-03-29T10:05:45+08:00'</span>
+
+<span class="c1">// read/write customized format</span>
+<span class="nx">moment</span><span class="p">.</span><span class="nx">tz</span><span class="p">(</span><span class="dl">"</span><span class="s2">2012-03-29 13:05:45</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">YYYY-MM-DD hh:mm:ss</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Australia/Perth</span><span class="dl">"</span><span class="p">).</span><span class="nx">toDate</span><span class="p">();</span> <span class="c1">// =&gt; 2012-03-29T05:05:45.000Z</span>
+
+<span class="nx">moment</span><span class="p">(</span><span class="dl">"</span><span class="s2">2012-03-29 13:05:45+11:00</span><span class="dl">"</span><span class="p">).</span><span class="nx">format</span><span class="p">(</span><span class="dl">'</span><span class="s1">YYYY-MM-DD hh:mm:ss</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// =&gt; '2012-03-29 01:05:45'</span>
+
+<span class="nx">moment</span><span class="p">(</span><span class="dl">"</span><span class="s2">2012-03-29 13:05:45+11:00</span><span class="dl">"</span><span class="p">).</span><span class="nx">tz</span><span class="p">(</span><span class="dl">'</span><span class="s1">Australia/Perth</span><span class="dl">'</span><span class="p">).</span><span class="nx">format</span><span class="p">(</span><span class="dl">'</span><span class="s1">YYYY-MM-DD hh:mm:ss</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// =&gt; '2012-03-29 10:05:45'</span>
+</code></pre></div>
+<p>Javascript <code>Date</code> provides very basic utilites for DateTime. Hence, for complex parsing and formatting, devs usually use <code>moment</code> and <code>moment-timezone</code>.</p>
+<h2 id='dealing-with-rdbms-sql-lite'>Dealing with RDBMS (SQL Lite)</h2><h2 id='packages-or-modules'>Packages or Modules</h2>
 <p>In <strong>golang</strong>, a publishable unit is called module, consisting a list of packages. A package can be one file or many files. This is similar to Java. </p>
 
 <p>In <strong>javascript</strong>, a publishable is called package, consisting a list of modules. A module is one JS file.</p>
