@@ -559,6 +559,40 @@ Javascript, is almost the easiest language in dealing with JSON.
 Golang Like other static typed language, requires defined types to match JSON message.
 
 ## DateTime
+```go
+```
+
+```javascript
+// get timestamp
+new Date().getTime() // current timestamp: 1596147462418
+
+// create date time object from timestamp
+new Date(1596147462418) // => 2020-07-30T22:17:42.418Z
+
+// read/write ISO format without timezone information
+new Date('2012-07-29T11:05:45') // => 2012-07-29T01:05:45.000Z, printed UTC value, local timezone is used during parsing
+
+// read/write ISO format with timezone information
+new Date('2012-03-29T10:05:45+10:00') // => 2012-03-29T00:05:45.000Z, printed UTC value
+new Date('2012-03-29T10:05:45+08:00') // => 2012-03-29T02:05:45.000Z
+
+// print local DateTime String, with specified timezone
+const moment = require('moment-timezone');
+moment(new Date('2012-03-29T10:05:45+08:00')).format(); // => '2012-03-29T13:05:45+11:00'
+moment(new Date('2012-03-29T10:05:45+08:00')).tz('UTC').format(); // => '2012-03-29T02:05:45Z'
+
+moment(new Date('2012-03-29T10:05:45+08:00')).tz('Australia/Perth').format(); // => '2012-03-29T10:05:45+08:00'
+
+// read/write customized format
+moment.tz("2012-03-29 13:05:45", "YYYY-MM-DD hh:mm:ss", "Australia/Perth").toDate(); // => 2012-03-29T05:05:45.000Z
+
+moment("2012-03-29 13:05:45+11:00").format('YYYY-MM-DD hh:mm:ss') // => '2012-03-29 01:05:45'
+
+moment("2012-03-29 13:05:45+11:00").tz('Australia/Perth').format('YYYY-MM-DD hh:mm:ss') // => '2012-03-29 10:05:45'
+```
+
+Javascript `Date` provides very basic utilites for DateTime. Hence, for complex parsing and formatting, devs usually use `moment` and `moment-timezone`.
+
 
 ## Dealing with RDBMS (SQL Lite)
 
