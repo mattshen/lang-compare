@@ -1477,7 +1477,33 @@ style APIs. </p>
 <p>Javascript, is almost the easiest language in dealing with JSON.</p>
 
 <p>Golang Like other static typed language, requires defined types to match JSON message.</p>
-<h2 id='datetime'>DateTime</h2><div class="highlight"><pre class="highlight go tab-go"><code></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// get timestamp</span>
+<h2 id='datetime'>DateTime</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">import</span> <span class="s">"time"</span>
+<span class="c">// get timestamp in milliseconds</span>
+<span class="n">time</span><span class="o">.</span><span class="n">Now</span><span class="p">()</span><span class="o">.</span><span class="n">UnixNano</span><span class="p">()</span> <span class="o">/</span> <span class="m">1000000</span> <span class="c">// =&gt; 1596239578956</span>
+
+<span class="c">// create date time object from timestamp</span>
+<span class="n">time</span><span class="o">.</span><span class="n">Unix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1596239578956</span> <span class="o">*</span> <span class="kt">int64</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">Millisecond</span><span class="p">))</span> <span class="c">// =&gt; 2020-07-31 23:52:58.956 +0000 UTC</span>
+<span class="n">time</span><span class="o">.</span><span class="n">Unix</span><span class="p">(</span><span class="m">1596239578</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="c">// =&gt; seconds, 2020-07-31 23:52:58 +0000 UTC</span>
+
+<span class="c">// read/write ISO format without timezone information</span>
+<span class="c">// need to manually assign timezone to match RFC3339 </span>
+<span class="n">dt</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">time</span><span class="o">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">RFC3339</span><span class="p">,</span> <span class="s">"2012-07-29T11:05:45"</span> <span class="o">+</span> <span class="s">"+00:00"</span><span class="p">)</span><span class="c">// =&gt; 2012-07-29 11:05:45 +0000 UTC</span>
+
+<span class="c">// read/write ISO format with timezone information</span>
+<span class="n">dt</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">time</span><span class="o">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">RFC3339</span><span class="p">,</span> <span class="s">"2012-03-29T10:05:45+10:00"</span><span class="p">)</span> <span class="c">// =&gt; 2012-03-29 10:05:45 +1000 +1000</span>
+<span class="n">dt</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">time</span><span class="o">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">RFC3339</span><span class="p">,</span> <span class="s">"2012-03-29T10:05:45+08:00"</span><span class="p">)</span> <span class="c">// =&gt; 2012-03-29 10:05:45 +0800 +0800</span>
+
+<span class="c">// print local DateTime String, with specified timezone</span>
+<span class="n">tz1</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">time</span><span class="o">.</span><span class="n">LoadLocation</span><span class="p">(</span><span class="s">"Australia/Sydney"</span><span class="p">)</span>
+<span class="n">tz2</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">time</span><span class="o">.</span><span class="n">LoadLocation</span><span class="p">(</span><span class="s">"Australia/Perth"</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">Unix</span><span class="p">(</span><span class="m">1596239578</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span><span class="o">.</span><span class="n">In</span><span class="p">(</span><span class="n">tz1</span><span class="p">)</span><span class="o">.</span><span class="n">Format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">RFC3339</span><span class="p">)</span> <span class="c">// =&gt; '2020-08-01T09:52:58+10:00'</span>
+
+<span class="c">// read/write customized format</span>
+<span class="n">time</span><span class="o">.</span><span class="n">Unix</span><span class="p">(</span><span class="m">1596239578</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span><span class="o">.</span><span class="n">In</span><span class="p">(</span><span class="n">tz2</span><span class="p">)</span><span class="o">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"2006-01-02 15:04:05"</span><span class="p">)</span> <span class="c">// =&gt; 2020-08-01 07:52:58</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">time</span><span class="o">.</span><span class="n">ParseInLocation</span><span class="p">(</span><span class="s">"2006-01-02 15:04:05"</span><span class="p">,</span> <span class="s">"2020-08-01 07:52:58"</span><span class="p">,</span> <span class="n">tz2</span><span class="p">)</span>
+<span class="n">t</span> <span class="c">// =&gt; 2020-08-01 07:52:58 +0800 AWST</span>
+<span class="n">t</span><span class="o">.</span><span class="n">In</span><span class="p">(</span><span class="n">tz1</span><span class="p">)</span> <span class="c">// =&gt; 2020-08-01 09:52:58 +1000 AEST</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// get timestamp in milliseconds</span>
 <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="c1">// current timestamp: 1596147462418</span>
 
 <span class="c1">// create date time object from timestamp</span>
@@ -1505,6 +1531,8 @@ style APIs. </p>
 <span class="nx">moment</span><span class="p">(</span><span class="dl">"</span><span class="s2">2012-03-29 13:05:45+11:00</span><span class="dl">"</span><span class="p">).</span><span class="nx">tz</span><span class="p">(</span><span class="dl">'</span><span class="s1">Australia/Perth</span><span class="dl">'</span><span class="p">).</span><span class="nx">format</span><span class="p">(</span><span class="dl">'</span><span class="s1">YYYY-MM-DD hh:mm:ss</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// =&gt; '2012-03-29 10:05:45'</span>
 </code></pre></div>
 <p>Javascript <code>Date</code> provides very basic utilites for DateTime. Hence, for complex parsing and formatting, devs usually use <code>moment</code> and <code>moment-timezone</code>.</p>
+
+<p>Golang has quite sufficient built-in utilities from package <code>time</code>.</p>
 <h2 id='dealing-with-rdbms-sql-lite'>Dealing with RDBMS (SQL Lite)</h2><h2 id='packages-or-modules'>Packages or Modules</h2>
 <p>In <strong>golang</strong>, a publishable unit is called module, consisting a list of packages. A package can be one file or many files. This is similar to Java. </p>
 
