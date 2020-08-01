@@ -560,10 +560,36 @@ Golang Like other static typed language, requires defined types to match JSON me
 
 ## DateTime
 ```go
+import "time"
+// get timestamp in milliseconds
+time.Now().UnixNano() / 1000000 // => 1596239578956
+
+// create date time object from timestamp
+time.Unix(0, 1596239578956 * int64(time.Millisecond)) // => 2020-07-31 23:52:58.956 +0000 UTC
+time.Unix(1596239578, 0) // => seconds, 2020-07-31 23:52:58 +0000 UTC
+
+// read/write ISO format without timezone information
+// need to manually assign timezone to match RFC3339 
+dt, _ := time.Parse(time.RFC3339, "2012-07-29T11:05:45" + "+00:00")// => 2012-07-29 11:05:45 +0000 UTC
+
+// read/write ISO format with timezone information
+dt, _ := time.Parse(time.RFC3339, "2012-03-29T10:05:45+10:00") // => 2012-03-29 10:05:45 +1000 +1000
+dt, _ := time.Parse(time.RFC3339, "2012-03-29T10:05:45+08:00") // => 2012-03-29 10:05:45 +0800 +0800
+
+// print local DateTime String, with specified timezone
+tz1, _ := time.LoadLocation("Australia/Sydney")
+tz2, _ := time.LoadLocation("Australia/Perth")
+time.Unix(1596239578, 0).In(tz1).Format(time.RFC3339) // => '2020-08-01T09:52:58+10:00'
+
+// read/write customized format
+time.Unix(1596239578, 0).In(tz2).Format("2006-01-02 15:04:05") // => 2020-08-01 07:52:58
+t, _ := time.ParseInLocation("2006-01-02 15:04:05", "2020-08-01 07:52:58", tz2)
+t // => 2020-08-01 07:52:58 +0800 AWST
+t.In(tz1) // => 2020-08-01 09:52:58 +1000 AEST
 ```
 
 ```javascript
-// get timestamp
+// get timestamp in milliseconds
 new Date().getTime() // current timestamp: 1596147462418
 
 // create date time object from timestamp
@@ -592,6 +618,8 @@ moment("2012-03-29 13:05:45+11:00").tz('Australia/Perth').format('YYYY-MM-DD hh:
 ```
 
 Javascript `Date` provides very basic utilites for DateTime. Hence, for complex parsing and formatting, devs usually use `moment` and `moment-timezone`.
+
+Golang has quite sufficient built-in utilities from package `time`.
 
 
 ## Dealing with RDBMS (SQL Lite)
