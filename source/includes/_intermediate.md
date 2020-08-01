@@ -215,6 +215,81 @@ measure(r) // => Geometry main.rect{width:3, height:4}, area=12.000000, perimete
 In go, this is no `implements` keyword for implement an interface. 
 If type TA defines all methods specified in interface IA, it is said that type TA satifies interface IA. 
 
+## Enumeration
+```go
+import (
+	"errors"
+	"fmt"
+)
+
+type Season string
+
+const (
+	SUMMER Season = "summer"
+	WINTER        = "winter"
+	SPRING        = "spring"
+	AUTUMN        = "autumn"
+)
+
+//alternative
+const (  // iota is reset to 0
+  c0 = iota  // c0 == 0
+  c1 = iota  // c1 == 1
+  c2 = iota  // c2 == 2
+)
+
+func monthToSeason(month int) (Season, error) {
+	var season Season
+	switch month {
+	case 9, 10, 11:
+		season = SPRING
+	case 12, 1, 2:
+		season = SUMMER
+	case 3, 4, 5:
+		season = AUTUMN
+	case 6, 7, 8:
+		season = WINTER
+	default:
+		return "", errors.New("Invalid month")
+	}
+	return season, nil
+}
+
+func main() {
+	month := 8
+	season1, err := monthToSeason(month)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Month %d belongs to %s\n", month, season1)
+}
+```
+
+```javascript
+const seasons = {
+    SUMMER: 'summer',
+    WINTER: 'winter',
+    SPRING: 'spring',
+    AUTUMN: 'autumn'
+}
+
+switch(season){
+    case seasons.SUMMER:
+    // Do something for summer
+    case seasons.WINTER:
+    //Do something for winter
+    case seasons.SPRING:
+    //Do something for spring
+    case seasons.AUTUMN:
+    //Do something for autumn
+}
+```
+
+Neither go or javascript has built-in support to enumeration. However, we can use some tricks to simulate it. 
+
+### References
+- https://www.ribice.ba/golang-enums/
+
 ## Error handling
 ```go
 func f1(arg int) (int, error) {
@@ -622,7 +697,7 @@ Javascript `Date` provides very basic utilites for DateTime. Hence, for complex 
 Golang has quite sufficient built-in utilities from package `time`.
 
 
-## Dealing with RDBMS (SQL Lite)
+## Dealing with RDBMS (Postgres)
 
 
 ## Packages or Modules
