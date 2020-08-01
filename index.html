@@ -276,6 +276,9 @@
                     <a href="#interface" class="toc-h2 toc-link" data-title="Interface">Interface</a>
                   </li>
                   <li>
+                    <a href="#enumeration" class="toc-h2 toc-link" data-title="Enumeration">Enumeration</a>
+                  </li>
+                  <li>
                     <a href="#error-handling" class="toc-h2 toc-link" data-title="Error handling">Error handling</a>
                   </li>
                   <li>
@@ -297,7 +300,7 @@
                     <a href="#datetime" class="toc-h2 toc-link" data-title="DateTime">DateTime</a>
                   </li>
                   <li>
-                    <a href="#dealing-with-rdbms-sql-lite" class="toc-h2 toc-link" data-title="Dealing with RDBMS (SQL Lite)">Dealing with RDBMS (SQL Lite)</a>
+                    <a href="#dealing-with-rdbms-postgres" class="toc-h2 toc-link" data-title="Dealing with RDBMS (Postgres)">Dealing with RDBMS (Postgres)</a>
                   </li>
                   <li>
                     <a href="#packages-or-modules" class="toc-h2 toc-link" data-title="Packages or Modules">Packages or Modules</a>
@@ -1175,6 +1178,75 @@ For a reference value, dereference (<code>*</code>) is required to access the va
 </code></pre></div>
 <p>In go, this is no <code>implements</code> keyword for implement an interface. 
 If type TA defines all methods specified in interface IA, it is said that type TA satifies interface IA. </p>
+<h2 id='enumeration'>Enumeration</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">import</span> <span class="p">(</span>
+    <span class="s">"errors"</span>
+    <span class="s">"fmt"</span>
+<span class="p">)</span>
+
+<span class="k">type</span> <span class="n">Season</span> <span class="kt">string</span>
+
+<span class="k">const</span> <span class="p">(</span>
+    <span class="n">SUMMER</span> <span class="n">Season</span> <span class="o">=</span> <span class="s">"summer"</span>
+    <span class="n">WINTER</span>        <span class="o">=</span> <span class="s">"winter"</span>
+    <span class="n">SPRING</span>        <span class="o">=</span> <span class="s">"spring"</span>
+    <span class="n">AUTUMN</span>        <span class="o">=</span> <span class="s">"autumn"</span>
+<span class="p">)</span>
+
+<span class="c">//alternative</span>
+<span class="k">const</span> <span class="p">(</span>  <span class="c">// iota is reset to 0</span>
+  <span class="n">c0</span> <span class="o">=</span> <span class="no">iota</span>  <span class="c">// c0 == 0</span>
+  <span class="n">c1</span> <span class="o">=</span> <span class="no">iota</span>  <span class="c">// c1 == 1</span>
+  <span class="n">c2</span> <span class="o">=</span> <span class="no">iota</span>  <span class="c">// c2 == 2</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">monthToSeason</span><span class="p">(</span><span class="n">month</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="n">Season</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="n">season</span> <span class="n">Season</span>
+    <span class="k">switch</span> <span class="n">month</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="m">9</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">11</span><span class="o">:</span>
+        <span class="n">season</span> <span class="o">=</span> <span class="n">SPRING</span>
+    <span class="k">case</span> <span class="m">12</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="o">:</span>
+        <span class="n">season</span> <span class="o">=</span> <span class="n">SUMMER</span>
+    <span class="k">case</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">5</span><span class="o">:</span>
+        <span class="n">season</span> <span class="o">=</span> <span class="n">AUTUMN</span>
+    <span class="k">case</span> <span class="m">6</span><span class="p">,</span> <span class="m">7</span><span class="p">,</span> <span class="m">8</span><span class="o">:</span>
+        <span class="n">season</span> <span class="o">=</span> <span class="n">WINTER</span>
+    <span class="k">default</span><span class="o">:</span>
+        <span class="k">return</span> <span class="s">""</span><span class="p">,</span> <span class="n">errors</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="s">"Invalid month"</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">season</span><span class="p">,</span> <span class="no">nil</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">month</span> <span class="o">:=</span> <span class="m">8</span>
+    <span class="n">season1</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">monthToSeason</span><span class="p">(</span><span class="n">month</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Month %d belongs to %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">season1</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">seasons</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">SUMMER</span><span class="p">:</span> <span class="dl">'</span><span class="s1">summer</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">WINTER</span><span class="p">:</span> <span class="dl">'</span><span class="s1">winter</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">SPRING</span><span class="p">:</span> <span class="dl">'</span><span class="s1">spring</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">AUTUMN</span><span class="p">:</span> <span class="dl">'</span><span class="s1">autumn</span><span class="dl">'</span>
+<span class="p">}</span>
+
+<span class="k">switch</span><span class="p">(</span><span class="nx">season</span><span class="p">){</span>
+    <span class="k">case</span> <span class="nx">seasons</span><span class="p">.</span><span class="nx">SUMMER</span><span class="p">:</span>
+    <span class="c1">// Do something for summer</span>
+    <span class="k">case</span> <span class="nx">seasons</span><span class="p">.</span><span class="nx">WINTER</span><span class="p">:</span>
+    <span class="c1">//Do something for winter</span>
+    <span class="k">case</span> <span class="nx">seasons</span><span class="p">.</span><span class="nx">SPRING</span><span class="p">:</span>
+    <span class="c1">//Do something for spring</span>
+    <span class="k">case</span> <span class="nx">seasons</span><span class="p">.</span><span class="nx">AUTUMN</span><span class="p">:</span>
+    <span class="c1">//Do something for autumn</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Neither go or javascript has built-in support to enumeration. However, we can use some tricks to simulate it. </p>
+<h3 id='references'>References</h3>
+<ul>
+<li>https://www.ribice.ba/golang-enums/</li>
+</ul>
 <h2 id='error-handling'>Error handling</h2><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">func</span> <span class="n">f1</span><span class="p">(</span><span class="n">arg</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="m">42</span> <span class="p">{</span>
         <span class="k">return</span> <span class="o">-</span><span class="m">1</span><span class="p">,</span> <span class="n">errors</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="s">"can't work with 42"</span><span class="p">)</span>
@@ -1533,7 +1605,7 @@ style APIs. </p>
 <p>Javascript <code>Date</code> provides very basic utilites for DateTime. Hence, for complex parsing and formatting, devs usually use <code>moment</code> and <code>moment-timezone</code>.</p>
 
 <p>Golang has quite sufficient built-in utilities from package <code>time</code>.</p>
-<h2 id='dealing-with-rdbms-sql-lite'>Dealing with RDBMS (SQL Lite)</h2><h2 id='packages-or-modules'>Packages or Modules</h2>
+<h2 id='dealing-with-rdbms-postgres'>Dealing with RDBMS (Postgres)</h2><h2 id='packages-or-modules'>Packages or Modules</h2>
 <p>In <strong>golang</strong>, a publishable unit is called module, consisting a list of packages. A package can be one file or many files. This is similar to Java. </p>
 
 <p>In <strong>javascript</strong>, a publishable is called package, consisting a list of modules. A module is one JS file.</p>
