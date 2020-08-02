@@ -699,12 +699,10 @@ Golang has quite sufficient built-in utilities from package `time`.
 
 ## Access RDBMS (Postgres)
 
-Golang: https://github.com/mattshen/golang-examples/blob/master/08-rdbms-postgres/main.go
+* [Golang, https://github.com/mattshen/golang-examples/blob/master/08-rdbms-postgres/main.go](https://github.com/mattshen/golang-examples/blob/master/08-rdbms-postgres/main.go)
+* [Javascript, Node] (???)
 
 Golang has `database/sql`, which provide a generic interface around SQL databases. It is similar to Java's JDBC. 
-
-Nodejs: ???
-
 
 ## Packages or Modules
 
