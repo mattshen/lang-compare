@@ -337,7 +337,7 @@ class CustomError extends Error {
 }
 
 ```
-## Basic Asynchronous
+## Basic Concurrency
 ```go
 // defining two expensive computations
 func compute1() string {
@@ -699,10 +699,12 @@ Golang has quite sufficient built-in utilities from package `time`.
 
 ## Access RDBMS (Postgres)
 
-* [Golang, https://github.com/mattshen/golang-examples/blob/master/08-rdbms-postgres/main.go](https://github.com/mattshen/golang-examples/blob/master/08-rdbms-postgres/main.go)
-* [Javascript, Node] (???)
+* Golang, [https://github.com/mattshen/golang-examples/blob/master/08-rdbms-postgres/main.go](https://github.com/mattshen/golang-examples/blob/master/08-rdbms-postgres/main.go)
+* Javascript - NodeJS [https://github.com/mattshen/node-examples/blob/master/03-flyway-postgres/crud_cases.js](https://github.com/mattshen/node-examples/blob/master/03-flyway-postgres/crud_cases.js)
 
 Golang has `database/sql`, which provide a generic interface around SQL databases. It is similar to Java's JDBC. 
+
+NodeJS doesn't have standard interface to access SQL databases. However, the style varies from one driver to another. Often both callback- and promise-based APIs are provided.
 
 ## Packages or Modules
 

@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: Programming Language Comparison
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - go
@@ -14,7 +14,6 @@ includes:
   - intermediate
   - advanced
   - further
-  - errors
 
 search: true
 ---
