@@ -697,7 +697,13 @@ Javascript `Date` provides very basic utilites for DateTime. Hence, for complex 
 Golang has quite sufficient built-in utilities from package `time`.
 
 
-## Dealing with RDBMS (Postgres)
+## Access RDBMS (Postgres)
+
+Golang: https://github.com/mattshen/golang-examples/blob/master/08-rdbms-postgres/main.go
+
+Golang has `database/sql`, which provide a generic interface around SQL databases. It is similar to Java's JDBC. 
+
+Nodejs: ???
 
 
 ## Packages or Modules
